@@ -1,6 +1,7 @@
-# JavaScript Paginator / Pagination
+# JavaScript Paginator
 
-JavaScript EMCA6 simple but flexible paginator to use in virtually every project.
+Simple yet flexible pagination in JavaScript
+https://yavorivanov.github.io/javascript-paginator/
 
 ## Code Example
 
