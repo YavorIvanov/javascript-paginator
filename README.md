@@ -1,7 +1,13 @@
 # JavaScript Paginator
 
 Simple yet flexible pagination in JavaScript
-https://yavorivanov.github.io/javascript-paginator/
+
+Checkout javascript-paginator
+[site](https://yavorivanov.github.io/javascript-paginator/)
+or
+[github repo](https://github.com/YavorIvanov/javascript-paginator/)
+for more information.
+
 
 ## Code Example
 
