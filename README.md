@@ -23,7 +23,7 @@ var yourAppPreferences = {
 var options = {
   callback: yourCallback,
   total_items: yourAppPreferences.totalItemsCount,
-  current_page: 5
+  current_page: yourAppPreferences.currentPage
 };
 var paginator = new Paginator(options);
 paginator.render('#pagination');
