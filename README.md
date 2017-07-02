@@ -50,4 +50,12 @@ console.log(paginator.getItemsRange());
 
 ## Installation
 
-TODO Provide code examples and explanations of how to get the project.
+TBD
+
+## TODO
+
+* Refactor the render call (shorten and add better support for features)
+* Provide code examples and explanations of how to get the project.
+* Provide many styles of pagination (CSS)
+* Provide functionality for adding spacers between inner and outer (feature)
+* Provide possibility to render an extra element (useful for CSS styling)
