@@ -29,16 +29,16 @@ var paginator = new Paginator(options);
 paginator.render('#pagination');
 ```
 ## Options
-| Name                      | Type        | Description                                               |
-| ---                       | ---         | ---                                                       |
-| `total_items`             | `Number`    | **Required.** The total number of items.                  |
-| `current_page`            | `Number`    | **Required.** The current page. Default: `1`              |
-| `callback`                | `Function`  | **Important.** Return call with parameters.               |
-| `items_per_page`          | `Number`    | Adjust the number of items shown per page. Default: `10`  |
-| `previous_page_label`     | `String`    | Label for the `previous` button. Default: `❮`             |
-| `next_page_label`         | `String`    | Label for the `next` button. Default: `❯`                 |
-| `first_page_label`        | `String`    | Label for the `first` button. Default: `1`                |
-| `last_page_label`         | `String`    | Label for the `last` button. Defaults to total page count.|
+| Name                      | Type       | State          | Description                                               |
+| ---                       | ---        | ---            | ---                                                       |
+| `total_items`             | `Number`   | **Required**   | The total number of items.                                |
+| `current_page`            | `Number`   | **Required**   |  The current page. Default: `1`                           |
+| `callback`                | `Function` | **Important**  |  Return call with parameters.                             |
+| `items_per_page`          | `Number`   | Optional       | Adjust the number of items shown per page. Default: `10`  |
+| `previous_page_label`     | `String`   | Optional       | Label for the `previous` button. Default: `❮`             |
+| `next_page_label`         | `String`   | Optional       | Label for the `next` button. Default: `❯`                 |
+| `first_page_label`        | `String`   | Optional       | Label for the `first` button. Default: `1`                |
+| `last_page_label`         | `String`   | Optional       | Label for the `last` button. Defaults to total page count.|
 
 ## Installation
 
