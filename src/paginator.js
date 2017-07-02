@@ -1,4 +1,8 @@
-function Paginator(params = {}) {
+function Paginator(params) {
+
+  // normalize params
+  if (!params.labels)   { params.labels   = {}; }
+  if (!params.features) { params.features = {}; }
 
   // -- parameter defaults --
 
@@ -15,12 +19,18 @@ function Paginator(params = {}) {
   this.outerWindow        = params.outer_window || 1; // 0 to hide first & last
   this.innerWindow        = params.inner_window || 1; // around current
 
-  this.previousPageLabel  = params.previous_page_label  || '❮';
-  this.nextPageLabel      = params.next_page_label      || '❯';
-  this.firstPageLabel     = params.first_page_label     || this.firstPage;
-  this.lastPageLabel      = params.last_page_label      || this.lastPage;
+  this.labels = {
+    previousPage:  params.labels.previous_page  || '❮',
+    nextPage:      params.labels.next_page      || '❯',
+    firstPage:     params.labels.first_page     || this.firstPage,
+    lastPage:      params.labels.last_page      || this.lastPage
+  };
 
-  this.autoHide           = params.auto_hide  || false;
+  // feature switches
+  this.features = {
+    autoHide:       params.features.auto_hide      || false,
+    showDisabled:   params.features.show_disabled  || false
+  };
 
 
   //this.page           = params.page || 'page';
@@ -34,7 +44,7 @@ function Paginator(params = {}) {
     var self = this;
 
     // check if autoHide feature is on
-    if (this.autoHide && this.totalPages === 1) { return; }
+    if (this.features.autoHide && this.totalPages === 1) { return; }
 
     // Find the pagination elements we want to fill in
     var containers = document.querySelectorAll(containerSelector);
@@ -59,11 +69,11 @@ function Paginator(params = {}) {
           classNames.push('current');
         }
         if (i === this.firstPage) {
-          textName = this.firstPageLabel;
+          textName = this.labels.firstPage;
           classNames.push('first');
         }
         if (i === this.lastPage) {
-          textName = this.lastPageLabel;
+          textName = this.labels.lastPage;
           classNames.push('last');
         }
         // Push page
@@ -74,7 +84,7 @@ function Paginator(params = {}) {
     if (this.previousPage !== null) {
       items.unshift(this.generateListItem(
         this.previousPage,
-        this.previousPageLabel,
+        this.labels.previousPage,
         ['previous'])
       );
     }
@@ -82,7 +92,7 @@ function Paginator(params = {}) {
     if (this.nextPage !== null) {
       items.push(this.generateListItem(
         this.nextPage,
-        this.nextPageLabel,
+        this.labels.nextPage,
         ['next']
       ));
     }
