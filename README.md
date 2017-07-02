@@ -33,7 +33,7 @@ console.log(paginator.getItemsRange());
 ```
 ## Options
 | Name                  | Type       | State         | Description                                                |
-| --------------------- | ---------- | ------------- | ---------------------------------------------------------- |
+|-----------------------|------------|---------------|------------------------------------------------------------|
 | `total_items`         | `Integer`  | **Required**  | The total number of items.                                 |
 | `current_page`        | `Integer`  | **Required**  |  The current page. Default: `1`                            |
 | `callback`            | `Function` | **Important** |  Return call with parameters.                              |
