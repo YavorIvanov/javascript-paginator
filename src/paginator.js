@@ -29,7 +29,7 @@ function Paginator(params) {
   // feature switches
   this.features = {
     autoHide:       params.features.auto_hide      || false,
-    showDisabled:   params.features.show_disabled  || false
+    hideDisabled:   params.features.hide_disabled  || false
   };
 
 
@@ -81,19 +81,27 @@ function Paginator(params) {
       }
     };
     // Push previous page
-    if (this.previousPage !== null) {
+    var classNames = ['previous'];
+    if (this.previousPage === null) {
+      classNames.push('disabled');
+    }
+    if (!(this.features.hideDisabled && classNames.includes('disabled'))) {
       items.unshift(this.generateListItem(
         this.previousPage,
         this.labels.previousPage,
-        ['previous'])
-      );
+        classNames
+      ));
     }
     // Push next page
-    if (this.nextPage !== null) {
+    var classNames = ['next'];
+    if (this.nextPage === null) {
+      classNames.push('disabled');
+    }
+    if (!(this.features.hideDisabled && classNames.includes('disabled'))) {
       items.push(this.generateListItem(
         this.nextPage,
         this.labels.nextPage,
-        ['next']
+        classNames
       ));
     }
     // Attach all pages to DOM list

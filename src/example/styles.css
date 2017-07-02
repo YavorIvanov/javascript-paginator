@@ -80,3 +80,8 @@
 .pagination ul li a.last {
   text-decoration: underline;
 }
+.pagination ul li a.disabled {
+  pointer-events: none;
+  color: #ddd;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px;
+}

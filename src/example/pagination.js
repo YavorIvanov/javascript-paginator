@@ -5,11 +5,12 @@ function yourCallback(args = {}) {
 
 var options = {
   callback: yourCallback,
-  total_items: 1,
+  total_items: 100,
   items_per_page: 10,
   current_page: 1,
   features: {
-    auto_hide: true
+    auto_hide: true,
+    hide_disabled: true
   }
 };
 var paginator = new Paginator(options);
