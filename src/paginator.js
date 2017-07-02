@@ -20,6 +20,8 @@ function Paginator(params = {}) {
   this.firstPageLabel     = params.first_page_label     || this.firstPage;
   this.lastPageLabel      = params.last_page_label      || this.lastPage;
 
+  this.autoHide           = params.auto_hide  || false;
+
 
   //this.page           = params.page || 'page';
 
@@ -30,6 +32,9 @@ function Paginator(params = {}) {
     // TODO refactor this to become smaller
 
     var self = this;
+
+    // check if autoHide feature is on
+    if (this.autoHide && this.totalPages === 1) { return; }
 
     // Find the pagination elements we want to fill in
     var containers = document.querySelectorAll(containerSelector);
