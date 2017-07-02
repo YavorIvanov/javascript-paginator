@@ -16,14 +16,14 @@ function Paginator(params) {
   this.lastPage           = this.totalPages;
 
   // user perferences
-  this.outerWindow        = params.outer_window || 1; // 0 to hide first & last
-  this.innerWindow        = params.inner_window || 1; // around current
+  this.outerWindow        = params.outer_window; // !!! required
+  this.innerWindow        = params.inner_window; // !!! required
 
   this.labels = {
-    previousPage:  params.labels.previous_page  || '❮',
-    nextPage:      params.labels.next_page      || '❯',
-    firstPage:     params.labels.first_page     || this.firstPage,
-    lastPage:      params.labels.last_page      || this.lastPage
+    previousPage:   params.labels.previous_page   || '❮',
+    nextPage:       params.labels.next_page       || '❯',
+    firstPage:      params.labels.first_page      || this.firstPage,
+    lastPage:       params.labels.last_page       || this.lastPage,
   };
 
   // feature switches
@@ -54,6 +54,7 @@ function Paginator(params) {
     var items = [];
     // Push all pages
     for (i = 1; i <= this.totalPages; i++) {
+      debugger;
       if (
         ( i < this.firstPage + this.outerWindow ) || // left edge
         ( i > this.lastPage  - this.outerWindow ) || // right edge
@@ -124,7 +125,7 @@ function Paginator(params) {
             });
           });
         } else {
-          // TODO same url and attack page variable at the end
+          // TODO same url and attach page variable at the end
           // or just make your own callback that does that
           // if user one is missing; this might be better
         }

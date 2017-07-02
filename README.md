@@ -37,7 +37,9 @@ console.log(paginator.getItemsRange());
 |-------------------------|-------------|---------------|-------------------------------------------------------------|
 |`total_items`            | `Integer`   | **Required**  | The total number of items.                                  |
 |`current_page`           | `Integer`   | **Required**  | The current page. Default: `1`                              |
-|`callback`               | `Function`  | **Important** | Return call with parameters.                                |
+|`callback`               | `Function`  | **Required**  | Return call with parameters.                                |
+|`outer_window`           | `Integer`   | **Required**  | Specifies how many pages to show next to edges.             |
+|`inner_window`           | `Integer`   | **Required**  | Specifies how many pages to show around the current page.   |
 |`items_per_page`         | `Integer`   | Optional      | Adjust the number of items shown per page. Default: `10`    |
 |`labels.previous_page`   | `String`    | Optional      | Label for the `previous` button. Default: `❮`               |
 |`labels.next_page`       | `String`    | Optional      | Label for the `next` button. Default: `❯`                   |

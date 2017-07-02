@@ -81,7 +81,13 @@
   text-decoration: underline;
 }
 .pagination ul li a.disabled {
-  pointer-events: none;
+  pointer-events: none !important;
   color: #ddd;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px;
+}
+.pagination ul li a.spacers {
+  pointer-events: none !important;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
 }
