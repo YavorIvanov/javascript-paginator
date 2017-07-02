@@ -33,16 +33,18 @@ console.log(paginator.getItemsRange());
 
 ## Options
 
-| Name                  | Type        | State         | Description                                                 |
-|-----------------------|-------------|---------------|-------------------------------------------------------------|
-|`total_items`          | `Integer`   | **Required**  | The total number of items.                                  |
-|`current_page`         | `Integer`   | **Required**  | The current page. Default: `1`                              |
-|`callback`             | `Function`  | **Important** | Return call with parameters.                                |
-|`items_per_page`       | `Integer`   | Optional      | Adjust the number of items shown per page. Default: `10`    |
-|`previous_page_label`  | `String`    | Optional      | Label for the `previous` button. Default: `❮`               |
-|`next_page_label`      | `String`    | Optional      | Label for the `next` button. Default: `❯`                   |
-|`first_page_label`     | `String`    | Optional      | Label for the `first` button. Default: `1`                  |
-|`last_page_label`      | `String`    | Optional      | Label for the `last` button. Defaults to total page count.  |
+| Name                    | Type        | State         | Description                                                 |
+|-------------------------|-------------|---------------|-------------------------------------------------------------|
+|`total_items`            | `Integer`   | **Required**  | The total number of items.                                  |
+|`current_page`           | `Integer`   | **Required**  | The current page. Default: `1`                              |
+|`callback`               | `Function`  | **Important** | Return call with parameters.                                |
+|`items_per_page`         | `Integer`   | Optional      | Adjust the number of items shown per page. Default: `10`    |
+|`labels.previous_page`   | `String`    | Optional      | Label for the `previous` button. Default: `❮`               |
+|`labels.next_page`       | `String`    | Optional      | Label for the `next` button. Default: `❯`                   |
+|`labels.first_page`      | `String`    | Optional      | Label for the `first` button. Default: `1`                  |
+|`labels.last_page`       | `String`    | Optional      | Label for the `last` button. Defaults to total page count.  |
+|`features.auto_hide`     | `String`    | Optional      | Hides pagination if only one page is present.               |
+|`features.hide_disabled` | `String`    | Optional      | Hides next or previous page if they aren't clickable.       |
 
 ## Installation
 
