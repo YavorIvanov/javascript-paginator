@@ -2,10 +2,10 @@ function Paginator(params = {}) {
 
   // -- parameter defaults --
 
-  this.totalItems         = params.total_items;
+  this.totalItems         = params.total_items;         // !!! required
+  this.currentPage        = params.current_page || 1;   // !!! required
   this.itemsPerPage       = params.items_per_page || 10;
-  this.totalPages         = params.total_pages || this.calculateTotalPages();
-  this.currentPage        = params.current_page || 1;
+  this.totalPages         = this.calculateTotalPages();
   this.previousPage       = this.calculatePreviousPage();
   this.nextPage           = this.calculateNextPage();
   this.firstPage          = 1;
@@ -28,6 +28,8 @@ function Paginator(params = {}) {
   // Generate DOM and populate targeted element
   this.render = function(containerSelector) {
     // TODO refactor this to become smaller
+
+    var self = this;
 
     // Find the pagination elements we want to fill in
     var containers = document.querySelectorAll(containerSelector);
@@ -92,8 +94,10 @@ function Paginator(params = {}) {
       links.forEach( function(link) {
         if (params.callback) {
           link.addEventListener('click', function() {
+            var page = parseInt(this.dataset.page); // the clicked page in integer
             params.callback({
-              page: this.dataset.page
+              page: page,
+              itemsRange: self.getItemsRange(page)
             });
           });
         } else {
@@ -112,7 +116,7 @@ Paginator.prototype = {
 
   // What is the previous page from the current one
   calculatePreviousPage: function() {
-    if (this.currentPage < this.totalPages && this.currentPage > 1) {
+    if (this.currentPage <= this.totalPages && this.currentPage > 1) {
       return (this.currentPage-1);
     } else {
       return null;
@@ -146,6 +150,16 @@ Paginator.prototype = {
     link.appendChild(text);
     item.appendChild(link);
     return item;
+  },
+
+  // Pass item range for user appplication query purposes
+  getItemsRange: function(page = this.currentPage) {
+    var start = ((page - 1) * this.itemsPerPage);
+    var end = (start + this.itemsPerPage);
+    return {
+      start: start,
+      end: end
+    };
   }
 
 };

@@ -1,32 +1,14 @@
-function test(args = {}) {
+function yourCallback(args = {}) {
   console.log(args);
   return args;
 }
-var app_top = {
-  totalItemsCount: 1000
-};
 
-var options_top = {
-  callback: test,
-  total_items: app_top.totalItemsCount,
+var options = {
+  callback: yourCallback,
+  total_items: 100,
   items_per_page: 10,
-  current_page: 5,
-  first_page_label: 'first',
-  last_page_label: 'last'
+  current_page: 2,
 };
-var paginator_top = new Paginator(options_top);
-paginator_top.render('#pagination-top');
-
-
-
-var app_bottom = {
-  totalItemsCount: 100
-};
-
-var options_bottom = {
-  total_items: app_bottom.totalItemsCount,
-  items_per_page: 10,
-  current_page: 1
-};
-var paginator_bottom = new Paginator(options_bottom);
-paginator_bottom.render('#pagination-bottom');
+var paginator = new Paginator(options);
+paginator.render('#pagination');
+console.log(paginator.getItemsRange());
