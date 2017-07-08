@@ -54,7 +54,6 @@ function Paginator(params) {
     var items = [];
     // Push all pages
     for (i = 1; i <= this.totalPages; i++) {
-      debugger;
       if (
         ( i < this.firstPage + this.outerWindow ) || // left edge
         ( i > this.lastPage  - this.outerWindow ) || // right edge
