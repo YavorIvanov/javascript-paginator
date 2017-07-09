@@ -1,7 +1,7 @@
 class Paginator {
   constructor(params) {
     // normalize params
-    if (!params.options)  { params.labels   = {}; }
+    if (!params.options)  { params.options   = {}; }
     if (!params.labels)   { params.labels   = {}; }
     if (!params.features) { params.features = {}; }
 
@@ -20,21 +20,21 @@ class Paginator {
 
     // user preferences
     this.options = {
-      outerWindow:    params.outerWindow || 1,
-      innerWindow:    params.innerWindow || 1
+      innerPagesCount: this.setValue(params.options.innerPagesCount, 1),
+      outerPagesCount: this.setValue(params.options.outerPagesCount, 1)
     };
 
     this.labels = {
-      previousPage:   params.labels.previousPage    || '❮',
-      nextPage:       params.labels.nextPage        || '❯',
-      firstPage:      params.labels.firstPage       || this.firstPage,
-      lastPage:       params.labels.lastPage        || this.lastPage,
+      previousPage: params.labels.previousPage  || '❮',
+      nextPage:     params.labels.nextPage      || '❯',
+      firstPage:    params.labels.firstPage     || this.firstPage,
+      lastPage:     params.labels.lastPage      || this.lastPage,
     };
 
     // feature switches
     this.features = {
-      autoHide:       params.features.autoHide      || false,
-      hideDisabled:   params.features.hideDisabled  || false
+      autoHide:     params.features.autoHide      || false,
+      hideDisabled: params.features.hideDisabled  || false
     };
   }
 
@@ -55,6 +55,14 @@ class Paginator {
       this.nextPage = (this.currentPage+1);
     } else {
       this.nextPage = null;
+    }
+  }
+
+  setValue(integerValue, defaultValue) {
+    if ( isNaN(parseInt(integerValue)) ) {
+      return defaultValue;
+    } else {
+      return integerValue;
     }
   }
 
@@ -98,14 +106,15 @@ class Paginator {
     let list = document.createElement('ul');
     // This would contain all list items ( pages )
     let items = [];
+    
     // Push all pages
     for (let i = 1; i <= this.totalPages; i++) {
       if (
-        ( i < self.firstPage + self.options.outerWindow ) || // left edge
-        ( i > self.lastPage  - self.options.outerWindow ) || // right edge
+        ( i < self.firstPage + self.options.outerPagesCount ) || // left edge
+        ( i > self.lastPage  - self.options.outerPagesCount ) || // right edge
         ( // around current page
-          ( i >= self.currentPage - self.options.innerWindow ) &&
-          ( i <= self.currentPage + self.options.innerWindow )
+          ( i >= self.currentPage - self.options.innerPagesCount ) &&
+          ( i <= self.currentPage + self.options.innerPagesCount )
         )
       ) {
         // Determine page class and name
