@@ -5,14 +5,16 @@ function yourCallback(args = {}) {
 
 var options = {
   callback: yourCallback,
-  total_items: 100,
-  items_per_page: 10,
-  current_page: 5,
-  outer_window: 1,
-  inner_window: 1,
+  totalItems: 100,
+  itemsPerPage: 10,
+  currentPage: 5,
+  options: {
+    outerWindow: 1,
+    innerWindow: 1,
+  },
   features: {
-    auto_hide: true,
-    hide_disabled: true,
+    autoHide: true,
+    hideDisabled: true,
   }
 };
 var paginator = new Paginator(options);
