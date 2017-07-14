@@ -52,6 +52,16 @@ console.log(paginator.getItemsRange());
 
 TBD
 
+## Ideology
+
+- The pagination shouldn't really understand your data (objects)
+- It should be able to generate viable pagination just with basic data
+- It should be highly customizable and extendable with features
+- It should work for SPA and non-SPA
+- Code should be KISS compliant so that it is extendable by other people easily
+- Should follow ECMA standards but provide backward compatibility
+- Should try to `mildly force` developers into using better standards
+
 ## TODO
 
 * Refactor the render call (shorten and add better support for features)

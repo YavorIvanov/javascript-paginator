@@ -1,4 +1,5 @@
 class Paginator {
+
   constructor(params) {
     // normalize params
     if (!params.options)  { params.options   = {}; }
@@ -25,8 +26,8 @@ class Paginator {
     };
 
     this.labels = {
-      previousPage: params.labels.previousPage  || '❮',
-      nextPage:     params.labels.nextPage      || '❯',
+      previousPage: params.labels.previousPage  || "❮",
+      nextPage:     params.labels.nextPage      || "❯",
       firstPage:    params.labels.firstPage     || this.firstPage,
       lastPage:     params.labels.lastPage      || this.lastPage,
     };
@@ -36,6 +37,16 @@ class Paginator {
       autoHide:     params.features.autoHide      || false,
       hideDisabled: params.features.hideDisabled  || false
     };
+
+    // up to date Pages array of Page objects
+    this.pages = [];
+    // NB filled with page object:
+    //page = {
+    //  order: 0
+    //  label: "previous",
+    //  state: ["disabled", "previous"],
+    //  node: <DOM/NODE>
+    //};
   }
 
   calculateTotalPages() {
@@ -66,20 +77,6 @@ class Paginator {
     }
   }
 
-  // Generate functional DOM links for list
-  generateListItem(pageNumber, label, classNames) {
-    let item = document.createElement('li');
-    let link = document.createElement('a');
-    let text = document.createTextNode(label);
-    if (classNames) {
-      link.className = classNames.join(' ');
-    }
-    link.dataset.page = pageNumber;
-    link.appendChild(text);
-    item.appendChild(link);
-    return item;
-  }
-
   // Pass item range for user appplication query purposes
   getItemsRange(page = this.currentPage) {
     var start = ((page - 1) * this.itemsPerPage);
@@ -90,23 +87,60 @@ class Paginator {
     };
   }
 
+  // Generate page hash for pages array
+  generatePage(order, label, states, node) {
+    let hash = {
+      order: order,
+      label: label,
+      state: states,
+      node: node
+    };
+    return hash;
+  }
+
+  // Generate functional DOM link for the page hash
+  generateNode(pageNumber, label, classNames) {
+    let item = document.createElement("li");
+    let link = document.createElement("a");
+    let text = document.createTextNode(label);
+    if (classNames) {
+      link.className = classNames.join(" ");
+    }
+    link.dataset.page = pageNumber;
+    link.appendChild(text);
+    item.appendChild(link);
+    return item;
+  }
+
+  buildPreviousPage() {
+    let classNames = ["previous"];
+    let node = this.generateNode(this.previousPage, this.labels.previousPage, classNames);
+    let page = this.generatePage(this.previousPage, this.labels.previousPage, classNames, node);
+    this.pages.unshift(page);
+  }
+
+  buildNextPage() {
+    let classNames = ["next"];
+    if (this.nextPage == null) {
+      classNames.push("disabled");
+    }
+    let node = this.generateNode(this.nextPage, this.labels.nextPage, classNames);
+    let page = this.generatePage(this.nextPage, this.labels.nextPage, classNames, node);
+    this.pages.push(page);
+  }
+
   // Generate DOM and populate targeted element
+  // TODO use this only for DOM render and another method to build full Pages array
   render(containerSelector) {
-    // TODO refactor this to become smaller
-
-    var self = this; // TODO should be able to remove this when refactoring
-
-    // check if autoHide feature is on
-    if (this.features.autoHide && this.totalPages === 1) { return; }
-
     // Find the pagination elements we want to fill in
     let containers = document.querySelectorAll(containerSelector);
 
     // Create DOM list
-    let list = document.createElement('ul');
-    // This would contain all list items ( pages )
-    let items = [];
-    
+    let list = document.createElement("ul");
+    // This would contain all list pages
+
+    var self = this; // TODO should be able to remove this when refactoring
+
     // Push all pages
     for (let i = 1; i <= this.totalPages; i++) {
       if (
@@ -121,64 +155,39 @@ class Paginator {
         let classNames = [];
         let textName = i;
         if (i === self.currentPage) {
-          classNames.push('current');
+          classNames.push("current");
         }
         if (i === self.firstPage) {
           textName = self.labels.firstPage;
-          classNames.push('first');
+          classNames.push("first");
         }
         if (i === self.lastPage) {
           textName = self.labels.lastPage;
-          classNames.push('last');
+          classNames.push("last");
         }
         // Push page
-        items.push(self.generateListItem(i, textName, classNames));
-      }
-    };
-    // Push previous page
-    {
-      let classNames = ['previous'];
-      if (this.previousPage === null) {
-        classNames.push('disabled');
-      }
-      if (!(this.features.hideDisabled && classNames.includes('disabled'))) {
-        items.unshift(self.generateListItem(
-          this.previousPage,
-          this.labels.previousPage,
-          classNames
-        ));
+        let node = self.generateNode(i, textName, classNames);
+        let page = self.generatePage(i, textName, classNames, node);
+        self.pages.push(page);
       }
     }
-    // Push next page
-    {
-      let classNames = ['next'];
-      if (this.nextPage === null) {
-        classNames.push('disabled');
-      }
-      if (!(this.features.hideDisabled && classNames.includes('disabled'))) {
-        items.push(self.generateListItem(
-          this.nextPage,
-          this.labels.nextPage,
-          classNames
-        ));
-      }
-    }
-    // Attach all pages to DOM list
-    //for(let i of items.length) {
-    //  list.appendChild(items[i]);
-    //}
-    for (let i = 0; i < items.length; i++) {
-      list.appendChild(items[i]);
+
+    this.buildPreviousPage();
+    this.buildNextPage();
+
+
+    for (let i = 0; i < self.pages.length; i++) {
+      list.appendChild(self.pages[i].node);
     }
     // Append the new DOM structure to all matched container
-    containers.forEach( function(container) {
+    for (let container of containers) {
       let listCopy = list.cloneNode(true);
       container.appendChild(listCopy);
       // add event listeners
-      let links = container.querySelectorAll('a'); // NB returns a static NodeList, not live/dynamic NodeList, but it's more flexible to work with
-      links.forEach( function(link) {
+      let links = container.querySelectorAll("a"); // NB returns a static NodeList, not live/dynamic NodeList, but it"s more flexible to work with
+      for (let link of links) {
         if (self.callback) {
-          link.addEventListener('click', function() {
+          link.addEventListener("click", function() {
             let page = parseInt(this.dataset.page); // the clicked page in integer
             self.callback({
               page: page,
@@ -190,11 +199,8 @@ class Paginator {
           // or just make your own callback that does that
           // if user one is missing; this might be better
         }
-      });
-    });
-
-    //for (let container of containers) {
-    //  container.innerText = 'test';
-    //}
+      }
+    }
   }
+
 }

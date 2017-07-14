@@ -1,11 +1,21 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
-    "rules": {
-        "semi": 2
-    }
+  // the enviroment
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  // permit globals
+  "globals": {
+    //"Paginator": true
+  },
+  // useful defaults
+  "extends": "eslint:recommended",
+  // manual rules set
+  "rules": {
+    "no-unused-vars": [2, {"vars": "local", "args": "after-used"}],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+  }
 }
