@@ -2,7 +2,13 @@ var options = {
   callback: yourCallback,
   totalItems: 100,
   itemsPerPage: 10,
-  currentPage: 5
+  currentPage: 5,
+  features: {
+    hideAuto: false,
+    hideGaps: false,
+    hideAdjacent: false,
+    hideDisabled: false
+  }
 };
 var paginator1 = new Paginator(options);
 paginator1.render("#pagination1");

@@ -46,6 +46,7 @@ class Paginator {
     // internals
     this.pageStates = {
       disabled: "disabled",
+      hide:     "hide",
       current:  "current",
       first:    "first",
       last:     "last",
@@ -141,6 +142,14 @@ class Paginator {
     if (this.previousPage == null) {
       classNames.push(this.pageStates.disabled);
     }
+    // feature => hideAdjacent
+    if (this.features.hideAdjacent) {
+      classNames.push(this.pageStates.hide);
+    }
+    // feature => hideDisabled
+    if (this.features.hideDisabled && classNames.includes(this.pageStates.disabled)) {
+      classNames.push(this.pageStates.hide);
+    }
     const node = this.generateNode(dataset, label, classNames);
     const page = this.generatePage(order,   label, classNames, node);
     this.pages.unshift(page);
@@ -152,6 +161,14 @@ class Paginator {
     const classNames = [this.pageStates.next];
     if (this.nextPage == null) {
       classNames.push(this.pageStates.disabled);
+    }
+    // feature => hideAdjacent
+    if (this.features.hideAdjacent) {
+      classNames.push(this.pageStates.hide);
+    }
+    // feature => hideDisabled
+    if (this.features.hideDisabled && classNames.includes(this.pageStates.disabled)) {
+      classNames.push(this.pageStates.hide);
     }
     const node = this.generateNode(dataset, label, classNames);
     const page = this.generatePage(order,   label, classNames, node);
@@ -166,6 +183,10 @@ class Paginator {
 
     const label = this.labels.gapPage;
     const classNames = [this.pageStates.gap];
+    // feature => hideGaps
+    if (this.features.hideGaps) {
+      classNames.push(this.pageStates.hide);
+    }
     // left side
     if (innerEdgeLeft > outerEdgeLeft) {
       const order = (this.currentPage - this.options.innerPagesCount - 1);
@@ -221,6 +242,11 @@ class Paginator {
   // Generate DOM and populate targeted element
   // TODO use this only for DOM render and another method to build full Pages array
   render(containerSelector) {
+    // feature => hideAdjacent
+    if (this.features.hideAuto && this.totalPages < 2) {
+      return;
+    }
+
     // Find the pagination elements we want to fill in
     const containers = document.querySelectorAll(containerSelector);
 

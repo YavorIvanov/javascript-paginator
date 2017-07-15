@@ -85,6 +85,9 @@
   color: #ddd;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px;
 }
+.pagination ul li a.hide {
+  display: none;
+}
 .pagination ul li a.gap {
   pointer-events: none !important;
   background-color: transparent;
