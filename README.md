@@ -35,18 +35,22 @@ console.log(paginator.getItemsRange());
 
 | Name                    | Type        | State         | Description                                                 |
 |-------------------------|-------------|---------------|-------------------------------------------------------------|
-|`total_items`            | `Integer`   | **Required**  | The total number of items.                                  |
-|`current_page`           | `Integer`   | **Required**  | The current page. Default: `1`                              |
+|`totalItems`             | `Integer`   | **Required**  | The total number of items.                                  |
+|`currentPage`            | `Integer`   | **Required**  | The current page. Default: `1`                              |
 |`callback`               | `Function`  | **Required**  | Return call with parameters.                                |
-|`outer_window`           | `Integer`   | **Required**  | Specifies how many pages to show next to edges.             |
-|`inner_window`           | `Integer`   | **Required**  | Specifies how many pages to show around the current page.   |
-|`items_per_page`         | `Integer`   | Optional      | Adjust the number of items shown per page. Default: `10`    |
-|`labels.previous_page`   | `String`    | Optional      | Label for the `previous` button. Default: `❮`               |
-|`labels.next_page`       | `String`    | Optional      | Label for the `next` button. Default: `❯`                   |
-|`labels.first_page`      | `String`    | Optional      | Label for the `first` button. Default: `1`                  |
-|`labels.last_page`       | `String`    | Optional      | Label for the `last` button. Defaults to total page count.  |
-|`features.auto_hide`     | `String`    | Optional      | Hides pagination if only one page is present.               |
-|`features.hide_disabled` | `String`    | Optional      | Hides next or previous page if they aren't clickable.       |
+|`itemsPerPage`           | `Integer`   | Optional      | Adjust the number of items shown per page. Default: `10`    |
+|`options.outerPagesCount`| `Integer`   | Optional      | How many pages to show next to edges. Default: 1            |
+|`options.innerPagesCount`| `Integer`   | Optional      | How many pages to show around the current page. Default: 1  |
+|`labels.currentPage`     | `String`    | Optional      | Label for the `current` button. Default: `Integer`          |
+|`labels.previousPage`    | `String`    | Optional      | Label for the `previous` button. Default: `❮`               |
+|`labels.nextPage`        | `String`    | Optional      | Label for the `next` button. Default: `❯`                   |
+|`labels.firstPage`       | `String`    | Optional      | Label for the `first` button. Default: `1`                  |
+|`labels.lastPage`        | `String`    | Optional      | Label for the `last` button. Defaults to total page count.  |
+|`labels.gapPage`         | `String`    | Optional      | Label for the `gap` spacing. Default: `...``                |
+|`features.hideAuto`      | `Boolean`   | Optional      | Hide pagination if only one page is present.                |
+|`features.hideGaps`      | `Boolean`   | Optional      | Hide the gaps between outer and inner pages.                |
+|`features.hideAdjacent`  | `Boolean`   | Optional      | Hide next or previous page.                                 |
+|`features.hideDisabled`  | `Boolean`   | Optional      | Hide pages that aren't clickable. (next and previous)       |
 
 ## Installation
 
@@ -64,8 +68,6 @@ TBD
 
 ## TODO
 
-* Refactor the render call (shorten and add better support for features)
+* Refactor. Split into multiple classes.
 * Provide code examples and explanations of how to get the project.
 * Provide many styles of pagination (CSS)
-* Provide functionality for adding spacers between inner and outer (feature)
-* Provide possibility to render an extra element (useful for CSS styling)
