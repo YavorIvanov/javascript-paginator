@@ -32,12 +32,13 @@ class Paginator {
       nextPage:     params.labels.nextPage      || "❯",
       firstPage:    params.labels.firstPage     || this.firstPage,
       lastPage:     params.labels.lastPage      || this.lastPage,
+      gapPage:      params.labels.gapPage       || "…"
     };
 
     // feature switches
     this.features = {
       hideAuto:     params.features.hideAuto      || false, // hide the whole pagination if it's one page
-      hideSpacers:  params.featureshideSpacers    || false, // hide spacers between outer and inner pages
+      hideGaps:     params.features.hideGaps      || false, // hide the gaps between outer and inner pages
       hideAdjacent: params.features.hideAdjacent  || false, // hide the next and previous page
       hideDisabled: params.features.hideDisabled  || false, // hide all pages with page state disabled
     };
@@ -49,7 +50,8 @@ class Paginator {
       first:    "first",
       last:     "last",
       previous: "previous",
-      next:     "next"
+      next:     "next",
+      gap:      "gap"
     };
     // up to date Pages array of Page objects
     this.pages = [];
@@ -156,6 +158,30 @@ class Paginator {
     this.pages.push(page);
   }
 
+  buildGaps() {
+    let outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
+    let outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
+    let innerEdgeLeft  = this.currentPage - this.options.innerPagesCount;
+    let innerEdgeRight = this.currentPage + this.options.innerPagesCount;
+
+    let label = this.labels.gapPage;
+    let classNames = [this.pageStates.gap];
+    // left side
+    if (innerEdgeLeft > outerEdgeLeft) {
+      let order = (this.currentPage - this.options.innerPagesCount - 1);
+      let node = this.generateNode("",  label, classNames);
+      let page = this.generatePage(order, label, classNames, node);
+      this.pages.push(page);
+    }
+    // right side
+    if (outerEdgeRight > innerEdgeRight) {
+      let order = (this.currentPage + this.options.innerPagesCount);
+      let node = this.generateNode("",  label, classNames);
+      let page = this.generatePage(order, label, classNames, node);
+      this.pages.push(page);
+    }
+  }
+
   buildAllPages() {
     let outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
     let outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
@@ -213,6 +239,7 @@ class Paginator {
     this.buildAllPages();
     this.buildPreviousPage(0); // default to first position
     this.buildNextPage(this.totalPages+1); // default to last position
+    this.buildGaps();
 
     this.sortPages();
 

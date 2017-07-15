@@ -38,7 +38,7 @@ paginator3.render("#pagination3");
 
 function yourCallback(args = {}) {
   console.log(args);
-  paginator3.currentPage = args.page;
-  paginator3.update("#pagination3");
+  paginator1.currentPage = args.page;
+  paginator1.update("#pagination1");
   //return args;
 }
