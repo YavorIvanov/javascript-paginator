@@ -27,6 +27,7 @@ class Paginator {
     };
 
     this.labels = {
+      currentPage:  params.labels.currentPage   || this.currentPage,
       previousPage: params.labels.previousPage  || "❮",
       nextPage:     params.labels.nextPage      || "❯",
       firstPage:    params.labels.firstPage     || this.firstPage,
@@ -148,6 +149,38 @@ class Paginator {
     this.pages.push(page);
   }
 
+  buildAllPages() {
+    let outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
+    let outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
+    let innerEdgeLeft  = this.currentPage - this.options.innerPagesCount;
+    let innerEdgeRight = this.currentPage + this.options.innerPagesCount;
+    for (let i = 1; i <= this.totalPages; i++) {
+      if (
+        ( i <  outerEdgeLeft || i >  outerEdgeRight ) ||
+        ( i >= innerEdgeLeft && i <= innerEdgeRight )
+      ) {
+        // Determine page class and name
+        let classNames = [];
+        let textName = i;
+        if (i === this.currentPage) {
+          classNames.push(this.pageStates.current);
+        }
+        if (i === this.firstPage) {
+          textName = this.labels.firstPage;
+          classNames.push(this.pageStates.first);
+        }
+        if (i === this.lastPage) {
+          textName = this.labels.lastPage;
+          classNames.push(this.pageStates.last);
+        }
+        // Push page
+        let node = this.generateNode(i, textName, classNames);
+        let page = this.generatePage(i, textName, classNames, node);
+        this.pages.push(page);
+      }
+    }
+  }
+
   // Generate DOM and populate targeted element
   // TODO use this only for DOM render and another method to build full Pages array
   render(containerSelector) {
@@ -160,37 +193,7 @@ class Paginator {
 
     var self = this; // TODO should be able to remove this when refactoring
 
-    // Push all pages
-    for (let i = 1; i <= this.totalPages; i++) {
-      if (
-        ( i < self.firstPage + self.options.outerPagesCount ) || // left edge
-        ( i > self.lastPage  - self.options.outerPagesCount ) || // right edge
-        ( // around current page
-          ( i >= self.currentPage - self.options.innerPagesCount ) &&
-          ( i <= self.currentPage + self.options.innerPagesCount )
-        )
-      ) {
-        // Determine page class and name
-        let classNames = [];
-        let textName = i;
-        if (i === self.currentPage) {
-          classNames.push(this.pageStates.current);
-        }
-        if (i === self.firstPage) {
-          textName = self.labels.firstPage;
-          classNames.push(this.pageStates.first);
-        }
-        if (i === self.lastPage) {
-          textName = self.labels.lastPage;
-          classNames.push(this.pageStates.last);
-        }
-        // Push page
-        let node = self.generateNode(i, textName, classNames);
-        let page = self.generatePage(i, textName, classNames, node);
-        self.pages.push(page);
-      }
-    }
-
+    this.buildAllPages();
     this.buildPreviousPage(0); // default to first position
     this.buildNextPage(this.totalPages+1); // default to last position
 
