@@ -105,7 +105,7 @@ class Paginator {
 
   // Generate page hash for pages array
   generatePage(order, label, states, node) {
-    let hash = {
+    const hash = {
       order: order,
       label: label,
       state: states,
@@ -116,9 +116,9 @@ class Paginator {
 
   // Generate functional DOM link for the page hash
   generateNode(pageNumber, label, classNames) {
-    let item = document.createElement("li");
-    let link = document.createElement("a");
-    let text = document.createTextNode(label);
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    const text = document.createTextNode(label);
     if (classNames) {
       link.className = classNames.join(" ");
     }
@@ -135,65 +135,65 @@ class Paginator {
   }
 
   buildPreviousPage(order) {
-    let dataset = this.previousPage;
-    let label = this.labels.previousPage;
-    let classNames = [this.pageStates.previous];
+    const dataset = this.previousPage;
+    const label = this.labels.previousPage;
+    const classNames = [this.pageStates.previous];
     if (this.previousPage == null) {
       classNames.push(this.pageStates.disabled);
     }
-    let node = this.generateNode(dataset, label, classNames);
-    let page = this.generatePage(order,   label, classNames, node);
+    const node = this.generateNode(dataset, label, classNames);
+    const page = this.generatePage(order,   label, classNames, node);
     this.pages.unshift(page);
   }
 
   buildNextPage(order) {
-    let dataset = this.nextPage;
-    let label = this.labels.nextPage;
-    let classNames = [this.pageStates.next];
+    const dataset = this.nextPage;
+    const label = this.labels.nextPage;
+    const classNames = [this.pageStates.next];
     if (this.nextPage == null) {
       classNames.push(this.pageStates.disabled);
     }
-    let node = this.generateNode(dataset, label, classNames);
-    let page = this.generatePage(order,   label, classNames, node);
+    const node = this.generateNode(dataset, label, classNames);
+    const page = this.generatePage(order,   label, classNames, node);
     this.pages.push(page);
   }
 
   buildGaps() {
-    let outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
-    let outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
-    let innerEdgeLeft  = this.currentPage - this.options.innerPagesCount;
-    let innerEdgeRight = this.currentPage + this.options.innerPagesCount;
+    const outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
+    const outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
+    const innerEdgeLeft  = this.currentPage - this.options.innerPagesCount;
+    const innerEdgeRight = this.currentPage + this.options.innerPagesCount;
 
-    let label = this.labels.gapPage;
-    let classNames = [this.pageStates.gap];
+    const label = this.labels.gapPage;
+    const classNames = [this.pageStates.gap];
     // left side
     if (innerEdgeLeft > outerEdgeLeft) {
-      let order = (this.currentPage - this.options.innerPagesCount - 1);
-      let node = this.generateNode("",  label, classNames);
-      let page = this.generatePage(order, label, classNames, node);
+      const order = (this.currentPage - this.options.innerPagesCount - 1);
+      const node = this.generateNode("",  label, classNames);
+      const page = this.generatePage(order, label, classNames, node);
       this.pages.push(page);
     }
     // right side
     if (outerEdgeRight > innerEdgeRight) {
-      let order = (this.currentPage + this.options.innerPagesCount);
-      let node = this.generateNode("",  label, classNames);
-      let page = this.generatePage(order, label, classNames, node);
+      const order = (this.currentPage + this.options.innerPagesCount);
+      const node = this.generateNode("",  label, classNames);
+      const page = this.generatePage(order, label, classNames, node);
       this.pages.push(page);
     }
   }
 
   buildAllPages() {
-    let outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
-    let outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
-    let innerEdgeLeft  = this.currentPage - this.options.innerPagesCount;
-    let innerEdgeRight = this.currentPage + this.options.innerPagesCount;
+    const outerEdgeLeft  = this.firstPage + this.options.outerPagesCount;
+    const outerEdgeRight = this.lastPage  - this.options.outerPagesCount;
+    const innerEdgeLeft  = this.currentPage - this.options.innerPagesCount;
+    const innerEdgeRight = this.currentPage + this.options.innerPagesCount;
     for (let i = 1; i <= this.totalPages; i++) {
       if (
         ( i <  outerEdgeLeft || i >  outerEdgeRight ) ||
         ( i >= innerEdgeLeft && i <= innerEdgeRight )
       ) {
         // Determine page class and name
-        let classNames = [];
+        const classNames = [];
         let textName = i;
         if (i === this.currentPage) {
           classNames.push(this.pageStates.current);
@@ -207,8 +207,8 @@ class Paginator {
           classNames.push(this.pageStates.last);
         }
         // Push page
-        let node = this.generateNode(i, textName, classNames);
-        let page = this.generatePage(i, textName, classNames, node);
+        const node = this.generateNode(i, textName, classNames);
+        const page = this.generatePage(i, textName, classNames, node);
         this.pages.push(page);
       }
     }
@@ -222,10 +222,10 @@ class Paginator {
   // TODO use this only for DOM render and another method to build full Pages array
   render(containerSelector) {
     // Find the pagination elements we want to fill in
-    let containers = document.querySelectorAll(containerSelector);
+    const containers = document.querySelectorAll(containerSelector);
 
     // Create DOM list
-    let list = document.createElement("ul");
+    const list = document.createElement("ul");
     // This would contain all list pages
 
     var self = this; // TODO should be able to remove this when refactoring
@@ -247,18 +247,18 @@ class Paginator {
       list.appendChild(self.pages[i].node);
     }
     // Append the new DOM structure to all matched container
-    for (let container of containers) {
+    for (const container of containers) {
       // clear the container for fresh render
       container.innerHTML = "";
       // copy the created nodes
-      let listCopy = list.cloneNode(true);
+      const listCopy = list.cloneNode(true);
       container.appendChild(listCopy);
       // add event listeners
-      let links = container.querySelectorAll("a"); // NB returns a static NodeList, not live/dynamic NodeList, but it"s more flexible to work with
-      for (let link of links) {
+      const links = container.querySelectorAll("a"); // NB returns a static NodeList, not live/dynamic NodeList, but it"s more flexible to work with
+      for (const link of links) {
         if (self.callback) {
           link.addEventListener("click", function() {
-            let page = parseInt(this.dataset.page); // the clicked page in integer
+            const page = parseInt(this.dataset.page); // the clicked page in integer
             self.callback({
               page: page,
               itemsRange: self.getItemsRange(page)
@@ -275,9 +275,9 @@ class Paginator {
 
   update(containerSelector) {
     // Find the pagination elements we want to fill in
-    let containers = document.querySelectorAll(containerSelector);
+    const containers = document.querySelectorAll(containerSelector);
     // Drop current contents
-    for (let container of containers) {
+    for (const container of containers) {
       container.innerHTML = "";
     }
     // re-render
