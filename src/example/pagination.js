@@ -1,13 +1,26 @@
+
 var options = {
   callback: yourCallback,
   totalItems: 100,
   itemsPerPage: 10,
-  currentPage: 5,
+  currentPage: 2,
+  options: {
+    outerPagesCount: 2,
+    innerPagesCount: 2
+  },
+  labels: {
+    currentPage:  "*",
+    previousPage: "❮",
+    nextPage:     "❯",
+    firstPage:    "first",
+    lastPage:     "last",
+    gapPage:      "…"
+  },
   features: {
     hideAuto: false,
     hideGaps: false,
     hideAdjacent: false,
-    hideDisabled: false
+    hideDisabled: true
   }
 };
 var paginator1 = new Paginator(options);

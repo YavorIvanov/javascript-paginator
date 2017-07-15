@@ -10,20 +10,36 @@ for more information.
 
 ## Code Example
 
+Full usage with all settings
 ```javascript
 function yourCallback(args = {}) {
-  console.log(args);
+  paginator.currentPage = args.page;
+  paginator.update("#pagination");
   return args;
 }
 
 var options = {
   callback: yourCallback,
-  total_items: 100,
-  items_per_page: 10,
-  current_page: 1,
+  totalItems: 100,
+  itemsPerPage: 10,
+  currentPage: 1,
+  options: {
+    outerPagesCount: 2,
+    innerPagesCount: 2
+  },
+  labels: {
+    currentPage:  "*",
+    previousPage: "prev",
+    nextPage:     "next",
+    firstPage:    "first",
+    lastPage:     "last",
+    gapPage:      " "
+  },
   features: {
-    auto_hide: true,
-    hide_disabled: true
+    hideAuto: false,
+    hideGaps: false,
+    hideAdjacent: false,
+    hideDisabled: false
   }
 };
 var paginator = new Paginator(options);
