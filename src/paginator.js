@@ -36,8 +36,10 @@ class Paginator {
 
     // feature switches
     this.features = {
-      autoHide:     params.features.autoHide      || false,
-      hideDisabled: params.features.hideDisabled  || false
+      hideAuto:     params.features.hideAuto      || false, // hide the whole pagination if it's one page
+      hideSpacers:  params.featureshideSpacers    || false, // hide spacers between outer and inner pages
+      hideAdjacent: params.features.hideAdjacent  || false, // hide the next and previous page
+      hideDisabled: params.features.hideDisabled  || false, // hide all pages with page state disabled
     };
 
     // internals
@@ -51,6 +53,7 @@ class Paginator {
     };
     // up to date Pages array of Page objects
     this.pages = [];
+    // TODO make this another class and use real objects
     // NB filled with page object:
     //page = {
     //  order: 0
@@ -250,6 +253,7 @@ class Paginator {
     for (let container of containers) {
       container.innerHTML = "";
     }
+    // re-render
     this.render(containerSelector);
   }
 
