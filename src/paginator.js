@@ -3,7 +3,7 @@ class Paginator {
   constructor(params) {
 
     // normalize params
-    if (!params.options)  { params.options   = {}; }
+    if (!params.options)  { params.options  = {}; }
     if (!params.labels)   { params.labels   = {}; }
     if (!params.features) { params.features = {}; }
 
@@ -122,23 +122,29 @@ class Paginator {
     return item;
   }
 
-  buildPreviousPage() {
+  sortPages() {
+    this.pages.sort(function (a, b) {
+      return (a.order - b.order);
+    });
+  }
+
+  buildPreviousPage(order) {
     let classNames = [this.pageStates.previous];
     if (this.previousPage == null) {
       classNames.push(this.pageStates.disabled);
     }
-    let node = this.generateNode(this.previousPage, this.labels.previousPage, classNames);
-    let page = this.generatePage(this.previousPage, this.labels.previousPage, classNames, node);
+    let node = this.generateNode(order, this.labels.previousPage, classNames);
+    let page = this.generatePage(order, this.labels.previousPage, classNames, node);
     this.pages.unshift(page);
   }
 
-  buildNextPage() {
+  buildNextPage(order) {
     let classNames = [this.pageStates.next];
     if (this.nextPage == null) {
       classNames.push(this.pageStates.disabled);
     }
-    let node = this.generateNode(this.nextPage, this.labels.nextPage, classNames);
-    let page = this.generatePage(this.nextPage, this.labels.nextPage, classNames, node);
+    let node = this.generateNode(order, this.labels.nextPage, classNames);
+    let page = this.generatePage(order, this.labels.nextPage, classNames, node);
     this.pages.push(page);
   }
 
@@ -185,9 +191,10 @@ class Paginator {
       }
     }
 
-    this.buildPreviousPage();
-    this.buildNextPage();
+    this.buildPreviousPage(0); // default to first position
+    this.buildNextPage(this.totalPages+1); // default to last position
 
+    this.sortPages();
 
     for (let i = 0; i < self.pages.length; i++) {
       list.appendChild(self.pages[i].node);
