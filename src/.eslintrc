@@ -6,7 +6,7 @@
   },
   // permit globals
   "globals": {
-    //"Paginator": true
+    "Paginator": true
   },
   // useful defaults
   "extends": "eslint:recommended",

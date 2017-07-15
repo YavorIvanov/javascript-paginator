@@ -2,7 +2,7 @@ class Paginator {
 
   constructor(params) {
 
-    // normalize params
+    // normalize params object
     if (!params.options)  { params.options  = {}; }
     if (!params.labels)   { params.labels   = {}; }
     if (!params.features) { params.features = {}; }
@@ -130,22 +130,26 @@ class Paginator {
   }
 
   buildPreviousPage(order) {
+    let dataset = this.previousPage;
+    let label = this.labels.previousPage;
     let classNames = [this.pageStates.previous];
     if (this.previousPage == null) {
       classNames.push(this.pageStates.disabled);
     }
-    let node = this.generateNode(order, this.labels.previousPage, classNames);
-    let page = this.generatePage(order, this.labels.previousPage, classNames, node);
+    let node = this.generateNode(dataset, label, classNames);
+    let page = this.generatePage(order,   label, classNames, node);
     this.pages.unshift(page);
   }
 
   buildNextPage(order) {
+    let dataset = this.nextPage;
+    let label = this.labels.nextPage;
     let classNames = [this.pageStates.next];
     if (this.nextPage == null) {
       classNames.push(this.pageStates.disabled);
     }
-    let node = this.generateNode(order, this.labels.nextPage, classNames);
-    let page = this.generatePage(order, this.labels.nextPage, classNames, node);
+    let node = this.generateNode(dataset, label, classNames);
+    let page = this.generatePage(order,   label, classNames, node);
     this.pages.push(page);
   }
 
@@ -181,6 +185,10 @@ class Paginator {
     }
   }
 
+  clearPages() {
+    this.pages = [];
+  }
+
   // Generate DOM and populate targeted element
   // TODO use this only for DOM render and another method to build full Pages array
   render(containerSelector) {
@@ -193,6 +201,12 @@ class Paginator {
 
     var self = this; // TODO should be able to remove this when refactoring
 
+    // recalculate in case the user has tampered with the object
+    this.calculateTotalPages();   // this.totalPages
+    this.calculatePreviousPage(); // this.previousPage
+    this.calculateNextPage();     // this.nextPage
+
+    this.clearPages();
     this.buildAllPages();
     this.buildPreviousPage(0); // default to first position
     this.buildNextPage(this.totalPages+1); // default to last position
@@ -204,6 +218,9 @@ class Paginator {
     }
     // Append the new DOM structure to all matched container
     for (let container of containers) {
+      // clear the container for fresh render
+      container.innerHTML = "";
+      // copy the created nodes
       let listCopy = list.cloneNode(true);
       container.appendChild(listCopy);
       // add event listeners
@@ -224,6 +241,16 @@ class Paginator {
         }
       }
     }
+  }
+
+  update(containerSelector) {
+    // Find the pagination elements we want to fill in
+    let containers = document.querySelectorAll(containerSelector);
+    // Drop current contents
+    for (let container of containers) {
+      container.innerHTML = "";
+    }
+    this.render(containerSelector);
   }
 
 }
