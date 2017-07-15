@@ -1,6 +1,7 @@
 class Paginator {
 
   constructor(params) {
+
     // normalize params
     if (!params.options)  { params.options   = {}; }
     if (!params.labels)   { params.labels   = {}; }
@@ -38,6 +39,15 @@ class Paginator {
       hideDisabled: params.features.hideDisabled  || false
     };
 
+    // internals
+    this.pageStates = {
+      disabled: "disabled",
+      current:  "current",
+      first:    "first",
+      last:     "last",
+      previous: "previous",
+      next:     "next"
+    };
     // up to date Pages array of Page objects
     this.pages = [];
     // NB filled with page object:
@@ -113,16 +123,19 @@ class Paginator {
   }
 
   buildPreviousPage() {
-    let classNames = ["previous"];
+    let classNames = [this.pageStates.previous];
+    if (this.previousPage == null) {
+      classNames.push(this.pageStates.disabled);
+    }
     let node = this.generateNode(this.previousPage, this.labels.previousPage, classNames);
     let page = this.generatePage(this.previousPage, this.labels.previousPage, classNames, node);
     this.pages.unshift(page);
   }
 
   buildNextPage() {
-    let classNames = ["next"];
+    let classNames = [this.pageStates.next];
     if (this.nextPage == null) {
-      classNames.push("disabled");
+      classNames.push(this.pageStates.disabled);
     }
     let node = this.generateNode(this.nextPage, this.labels.nextPage, classNames);
     let page = this.generatePage(this.nextPage, this.labels.nextPage, classNames, node);
@@ -155,15 +168,15 @@ class Paginator {
         let classNames = [];
         let textName = i;
         if (i === self.currentPage) {
-          classNames.push("current");
+          classNames.push(this.pageStates.current);
         }
         if (i === self.firstPage) {
           textName = self.labels.firstPage;
-          classNames.push("first");
+          classNames.push(this.pageStates.first);
         }
         if (i === self.lastPage) {
           textName = self.labels.lastPage;
-          classNames.push("last");
+          classNames.push(this.pageStates.last);
         }
         // Push page
         let node = self.generateNode(i, textName, classNames);
