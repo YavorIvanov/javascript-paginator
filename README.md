@@ -84,6 +84,7 @@ TBD
 
 ## TODO
 
+* Provide many styles of pagination (CSS)
 * Refactor. Split into multiple classes.
 * Provide code examples and explanations of how to get the project.
-* Provide many styles of pagination (CSS)
+* (questionable) You should be able to pass an object and use it's data (example date pagination)

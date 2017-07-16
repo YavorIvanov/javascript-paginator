@@ -1,7 +1,6 @@
 class Paginator {
 
   constructor(params) {
-
     // normalize params object
     if (!params.options)  { params.options  = {}; }
     if (!params.labels)   { params.labels   = {}; }
@@ -104,31 +103,6 @@ class Paginator {
     };
   }
 
-  // Generate page hash for pages array
-  generatePage(order, label, states, node) {
-    const hash = {
-      order: order,
-      label: label,
-      state: states,
-      node: node
-    };
-    return hash;
-  }
-
-  // Generate functional DOM link for the page hash
-  generateNode(pageNumber, label, classNames) {
-    const item = document.createElement("li");
-    const link = document.createElement("a");
-    const text = document.createTextNode(label);
-    if (classNames) {
-      link.className = classNames.join(" ");
-    }
-    link.dataset.page = pageNumber;
-    link.appendChild(text);
-    item.appendChild(link);
-    return item;
-  }
-
   sortPages() {
     this.pages.sort(function (a, b) {
       return (a.order - b.order);
@@ -136,42 +110,40 @@ class Paginator {
   }
 
   buildPreviousPage(order) {
-    const dataset = this.previousPage;
+    const dataset = {page: this.previousPage};
     const label = this.labels.previousPage;
-    const classNames = [this.pageStates.previous];
+    const states = [this.pageStates.previous];
     if (this.previousPage == null) {
-      classNames.push(this.pageStates.disabled);
+      states.push(this.pageStates.disabled);
     }
     // feature => hideAdjacent
     if (this.features.hideAdjacent) {
-      classNames.push(this.pageStates.hide);
+      states.push(this.pageStates.hide);
     }
     // feature => hideDisabled
-    if (this.features.hideDisabled && classNames.includes(this.pageStates.disabled)) {
-      classNames.push(this.pageStates.hide);
+    if (this.features.hideDisabled && states.includes(this.pageStates.disabled)) {
+      states.push(this.pageStates.hide);
     }
-    const node = this.generateNode(dataset, label, classNames);
-    const page = this.generatePage(order,   label, classNames, node);
+    const page = new Page(order, label, states, dataset);
     this.pages.unshift(page);
   }
 
   buildNextPage(order) {
-    const dataset = this.nextPage;
+    const dataset = {page: this.nextPage};
     const label = this.labels.nextPage;
-    const classNames = [this.pageStates.next];
+    const states = [this.pageStates.next];
     if (this.nextPage == null) {
-      classNames.push(this.pageStates.disabled);
+      states.push(this.pageStates.disabled);
     }
     // feature => hideAdjacent
     if (this.features.hideAdjacent) {
-      classNames.push(this.pageStates.hide);
+      states.push(this.pageStates.hide);
     }
     // feature => hideDisabled
-    if (this.features.hideDisabled && classNames.includes(this.pageStates.disabled)) {
-      classNames.push(this.pageStates.hide);
+    if (this.features.hideDisabled && states.includes(this.pageStates.disabled)) {
+      states.push(this.pageStates.hide);
     }
-    const node = this.generateNode(dataset, label, classNames);
-    const page = this.generatePage(order,   label, classNames, node);
+    const page = new Page(order, label, states, dataset);
     this.pages.push(page);
   }
 
@@ -182,23 +154,21 @@ class Paginator {
     const innerEdgeRight = this.currentPage + this.options.innerPagesCount;
 
     const label = this.labels.gapPage;
-    const classNames = [this.pageStates.gap];
+    const states = [this.pageStates.gap];
     // feature => hideGaps
     if (this.features.hideGaps) {
-      classNames.push(this.pageStates.hide);
+      states.push(this.pageStates.hide);
     }
     // left side
     if (innerEdgeLeft > outerEdgeLeft) {
       const order = (this.currentPage - this.options.innerPagesCount - 1);
-      const node = this.generateNode("",  label, classNames);
-      const page = this.generatePage(order, label, classNames, node);
+      const page = new Page(order, label, states);
       this.pages.push(page);
     }
     // right side
     if (outerEdgeRight > innerEdgeRight) {
       const order = (this.currentPage + this.options.innerPagesCount);
-      const node = this.generateNode("",  label, classNames);
-      const page = this.generatePage(order, label, classNames, node);
+      const page = new Page(order, label, states);
       this.pages.push(page);
     }
   }
@@ -214,22 +184,21 @@ class Paginator {
         ( i >= innerEdgeLeft && i <= innerEdgeRight )
       ) {
         // Determine page class and name
-        const classNames = [];
-        let textName = i;
+        const states = [];
+        let label = i;
         if (i === this.currentPage) {
-          classNames.push(this.pageStates.current);
+          states.push(this.pageStates.current);
         }
         if (i === this.firstPage) {
-          textName = this.labels.firstPage;
-          classNames.push(this.pageStates.first);
+          label = this.labels.firstPage;
+          states.push(this.pageStates.first);
         }
         if (i === this.lastPage) {
-          textName = this.labels.lastPage;
-          classNames.push(this.pageStates.last);
+          label = this.labels.lastPage;
+          states.push(this.pageStates.last);
         }
         // Push page
-        const node = this.generateNode(i, textName, classNames);
-        const page = this.generatePage(i, textName, classNames, node);
+        const page = new Page(i, label, states, {page: i});
         this.pages.push(page);
       }
     }
@@ -310,4 +279,31 @@ class Paginator {
     this.render(containerSelector);
   }
 
+}
+
+
+class Page {
+  constructor(order, label, states = [], dataset = {}) {
+    this.order    = order;
+    this.label    = label;
+    this.dataset  = dataset;
+    this.states   = states;
+    this.node     = this.generateNode(label, states, dataset);
+  }
+
+  // Generate functional DOM link for the page hash
+  generateNode(label, states = [], dataset = {}) {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    const text = document.createTextNode(label);
+    if (states) {
+      link.className = states.join(" ");
+    }
+    for (const data in dataset) {
+      link.dataset[data] = dataset[data];
+    }
+    link.appendChild(text);
+    item.appendChild(link);
+    return item;
+  }
 }

@@ -1,9 +1,9 @@
 
 var options = {
   callback: yourCallback,
-  totalItems: 100,
+  totalItems: 1000,
   itemsPerPage: 10,
-  currentPage: 2,
+  currentPage: 50,
   options: {
     outerPagesCount: 2,
     innerPagesCount: 2
@@ -33,14 +33,14 @@ paginator1.render("#pagination1");
 //var paginator2 = new Paginator(options);
 //paginator2.render(""#pagination2");
 
-options.labels.previousPage = null;
-options.labels.nextPage = null;
-options.labels.firstPage = "first";
-options.labels.lastPage = "last";
-options.options.outerPagesCount = 2;
-options.options.innerPagesCount = 2;
-var paginator3 = new Paginator(options);
-paginator3.render("#pagination3");
+//options.labels.previousPage = null;
+//options.labels.nextPage = null;
+//options.labels.firstPage = "first";
+//options.labels.lastPage = "last";
+//options.options.outerPagesCount = 2;
+//options.options.innerPagesCount = 2;
+//var paginator3 = new Paginator(options);
+//paginator3.render("#pagination3");
 
 //var options = {
 //  callback: yourCallback,
