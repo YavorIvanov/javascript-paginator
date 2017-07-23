@@ -12,5 +12,7 @@ gulp.task("copy", function() {
 });
 
 gulp.task("watch", function() {
-
+  gulp.watch(sass_input, ["copy"]).on("change", function(event) {
+    console.log("File " + event.path + " was " + event.type + ", running tasks...");
+  });
 });
