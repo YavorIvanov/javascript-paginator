@@ -22,9 +22,13 @@ var path_js_input  = path_app   + "/assets/javascripts/**/*.js";
 var path_js_output = path_build + "/assets/javascripts/";
 
 // default
-gulp.task("default", [
-  "browser-sync"
-]);
+gulp.task("default", function(callback) {
+  runSequence(
+    "build",
+    "watch",
+    callback
+  );
+});
 
 // tasks - build space
 gulp.task("build:src", function() {
@@ -68,17 +72,22 @@ gulp.task("build", function(callback) {
 
 // tasks - watch space
 
+gulp.task("watch:src", ["build:src"], function(done) {
+  browserSync.reload();
+  done();
+});
+
 gulp.task("watch:js", ["build:js"], function(done) {
   browserSync.reload();
   done();
 });
 
-gulp.task("watch:html", ["build:html"], function(done) {
-  browserSync.reload();
+gulp.task("watch:sass", ["build:sass"], function(done) {
   done();
 });
 
-gulp.task("watch:sass", ["build:sass"], function(done) {
+gulp.task("watch:html", ["build:html"], function(done) {
+  browserSync.reload();
   done();
 });
 
@@ -89,7 +98,7 @@ gulp.task("watch", function() {
     }
   });
 
-  gulp.watch( path_html_input,  ["watch:html"]  ).on("change", function(event) {
+  gulp.watch( path_source,      ["watch:src"]   ).on("change", function(event) {
     console.info(event.type, event.path);
   });
   gulp.watch( path_js_input,    ["watch:js"]    ).on("change", function(event) {
@@ -98,8 +107,7 @@ gulp.task("watch", function() {
   gulp.watch( path_sass_input,  ["build:sass"]  ).on("change", function(event) {
     console.info(event.type, event.path);
   });
-
-  //gulp.watch(path_sass_input, ["build:sass"]).on("change", function(event) {
-  //  console.info(event.type, event.path);
-  //});
+  gulp.watch( path_html_input,  ["watch:html"]  ).on("change", function(event) {
+    console.info(event.type, event.path);
+  });
 });
