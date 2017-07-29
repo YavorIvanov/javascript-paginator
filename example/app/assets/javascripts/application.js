@@ -23,8 +23,9 @@ var options = {
     hideDisabled: true
   }
 };
-var paginator1 = new Paginator(options);
-paginator1.render("#pagination1");
+
+//var paginator1 = new Paginator(options);
+//paginator1.render("#pagination1");
 
 //options.labels.previousPage = "previous";
 //options.labels.nextPage = "next";
@@ -56,8 +57,8 @@ paginator1.render("#pagination1");
 //paginator4.render(""#pagination4");
 
 function yourCallback(args = {}) {
-  console.log(args);
-  paginator1.currentPage = args.page;
-  paginator1.update("#pagination1");
+  console.info(args);
+  //paginator1.currentPage = args.page;
+  //paginator1.update("#pagination1");
   //return args;
 }

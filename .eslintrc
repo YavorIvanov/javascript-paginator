@@ -1,27 +1,28 @@
 {
   // the enviroment
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true
+  env: {
+    browser: true,
+    node: true,
+    es6: true
   },
   // permit globals
-  "globals": {
-    "Paginator": true
+  globals: {
+    Paginator: true
   },
   // useful defaults
-  "extends": "eslint:recommended",
+  extends: "eslint:recommended",
   // manual rules set
-  "rules": {
-    "no-unused-vars": [2, {"vars": "local", "args": "after-used"}],
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "double"],
-    "semi": ["error", "always"],
-    "prefer-const": ["error", {
-      "destructuring": "any",
-      "ignoreReadBeforeAssign": true
+  rules: {
+    no-unused-vars: [2, {vars: "local", args: "after-used"}],
+    indent: ["error", 2],
+    linebreak-style: ["error", "unix"],
+    quotes: ["error", "double"],
+    semi: ["error", "always"],
+    prefer-const: ["error", {
+      destructuring: "any",
+      ignoreReadBeforeAssign: true
     }],
-    "no-const-assign": "error"
+    no-const-assign: "error",
+    no-console: ["error", { allow: ["info", "warn", "error"] }]
   }
 }
