@@ -1,4 +1,7 @@
 {
+  parserOptions: {
+    sourceType: 'module'
+  },
   // the enviroment
   env: {
     browser: true,
@@ -7,22 +10,44 @@
   },
   // permit globals
   globals: {
-    Paginator: true
+    Paginator: true,
+    Page: true
   },
   // useful defaults
-  extends: "eslint:recommended",
+  extends: [
+    'eslint:recommended'
+  ],
   // manual rules set
   rules: {
-    no-unused-vars: [2, {vars: "local", args: "after-used"}],
-    indent: ["error", 2],
-    linebreak-style: ["error", "unix"],
-    quotes: ["error", "double"],
-    semi: ["error", "always"],
-    prefer-const: ["error", {
-      destructuring: "any",
+    no-unused-vars: [1, {
+      vars: 'all',
+      args: 'all',
+      varsIgnorePattern: 'Paginator|Page'
+    }],
+    indent: ['error', 2, {
+      SwitchCase: 1,
+      VariableDeclarator: 2,
+      MemberExpression: 1,
+      ArrayExpression: 1,
+      ObjectExpression: 1
+    }],
+    key-spacing: ['error', {
+      beforeColon: false,
+      afterColon: true,
+      mode: 'minimum',
+      align: 'value'
+    }],
+    linebreak-style: ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    prefer-const: ['error', {
+      destructuring: 'any',
       ignoreReadBeforeAssign: true
     }],
-    no-const-assign: "error",
-    no-console: ["error", { allow: ["info", "warn", "error"] }]
+    no-const-assign: 'error',
+    no-console: ['error', { allow: ['info', 'warn', 'error'] }],
+    block-spacing: 'error',
+    comma-style: ['error', 'last'],
+    comma-spacing: ["error", { before: false, after: true }]
   }
 }

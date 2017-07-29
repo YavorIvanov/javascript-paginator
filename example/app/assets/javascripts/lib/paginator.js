@@ -27,11 +27,11 @@ class Paginator {
 
     this.labels = {
       currentPage:  params.labels.currentPage   || this.currentPage,
-      previousPage: params.labels.previousPage  || "❮",
-      nextPage:     params.labels.nextPage      || "❯",
+      previousPage: params.labels.previousPage  || '❮',
+      nextPage:     params.labels.nextPage      || '❯',
       firstPage:    params.labels.firstPage     || this.firstPage,
       lastPage:     params.labels.lastPage      || this.lastPage,
-      gapPage:      params.labels.gapPage       || "…"
+      gapPage:      params.labels.gapPage       || '…'
     };
 
     // feature switches
@@ -44,14 +44,14 @@ class Paginator {
 
     // internals
     this.pageStates = {
-      disabled: "disabled",
-      hide:     "hide",
-      current:  "current",
-      first:    "first",
-      last:     "last",
-      previous: "previous",
-      next:     "next",
-      gap:      "gap"
+      disabled: 'disabled',
+      hide:     'hide',
+      current:  'current',
+      first:    'first',
+      last:     'last',
+      previous: 'previous',
+      next:     'next',
+      gap:      'gap'
     };
     // up to date Pages array of Page objects
     this.pages = [];
@@ -59,8 +59,8 @@ class Paginator {
     // NB filled with page object:
     //page = {
     //  order: 0
-    //  label: "previous",
-    //  state: ["disabled", "previous"],
+    //  label: 'previous',
+    //  state: ['disabled', 'previous'],
     //  node: <DOM/NODE>
     //};
   }
@@ -98,8 +98,8 @@ class Paginator {
     var start = ((page - 1) * this.itemsPerPage);
     var end = (start + this.itemsPerPage);
     return {
-      start: start,
-      end: end
+      start:  start,
+      end:    end
     };
   }
 
@@ -220,7 +220,7 @@ class Paginator {
     const containers = document.querySelectorAll(containerSelector);
 
     // Create DOM list
-    const list = document.createElement("ul");
+    const list = document.createElement('ul');
     // This would contain all list pages
 
     var self = this; // TODO should be able to remove this when refactoring
@@ -244,18 +244,18 @@ class Paginator {
     // Append the new DOM structure to all matched container
     for (const container of containers) {
       // clear the container for fresh render
-      container.innerHTML = "";
+      container.innerHTML = '';
       // copy the created nodes
       const listCopy = list.cloneNode(true);
       container.appendChild(listCopy);
       // add event listeners
-      const links = container.querySelectorAll("a"); // NB returns a static NodeList, not live/dynamic NodeList, but it"s more flexible to work with
+      const links = container.querySelectorAll('a'); // NB returns a static NodeList, not live/dynamic NodeList, but it's more flexible to work with
       for (const link of links) {
         if (self.callback) {
-          link.addEventListener("click", function() {
+          link.addEventListener('click', function() {
             const page = parseInt(this.dataset.page); // the clicked page in integer
             self.callback({
-              page: page,
+              page:       page,
               itemsRange: self.getItemsRange(page)
             });
           });
@@ -273,37 +273,10 @@ class Paginator {
     const containers = document.querySelectorAll(containerSelector);
     // Drop current contents
     for (const container of containers) {
-      container.innerHTML = "";
+      container.innerHTML = '';
     }
     // re-render
     this.render(containerSelector);
   }
 
-}
-
-
-class Page {
-  constructor(order, label, states = [], dataset = {}) {
-    this.order    = order;
-    this.label    = label;
-    this.dataset  = dataset;
-    this.states   = states;
-    this.node     = this.generateNode(label, states, dataset);
-  }
-
-  // Generate functional DOM link for the page hash
-  generateNode(label, states = [], dataset = {}) {
-    const item = document.createElement("li");
-    const link = document.createElement("a");
-    const text = document.createTextNode(label);
-    if (states) {
-      link.className = states.join(" ");
-    }
-    for (const data in dataset) {
-      link.dataset[data] = dataset[data];
-    }
-    link.appendChild(text);
-    item.appendChild(link);
-    return item;
-  }
 }
