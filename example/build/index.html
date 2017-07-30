@@ -4,22 +4,104 @@
     <meta charset="utf-8">
     <title>Example</title>
     <link rel="stylesheet" href="assets/stylesheets/application.css">
+    <link rel="stylesheet" href="assets/stylesheets/paginations/standard.css">
     <script src="assets/javascripts/lib/page.js"></script>
     <script src="assets/javascripts/lib/paginator.js"></script>
     <script src="assets/javascripts/application.js"></script>
   </head>
   <body>
-    <h1>Pagination example with Paginator</h1>
+    <h1>Examples</h1>
     <hr>
-
-    <h2>Standard</h2>
-    <nav id="pagination1" class="pagination"></nav>
-    <h2>Short with labels</h2>
-    <nav id="pagination2" class="pagination"></nav>
-    <h2>Long with labels</h2>
-    <nav id="pagination3" class="pagination"></nav>
-    <h2>Standard with features</h2>
-    <nav id="pagination4" class="pagination"></nav>
-
+    <form>
+      <fieldset>
+        <legend>Required:</legend>
+        <div>
+          <label for="totalItems">totalItems</label>
+          <input type="number" id="totalItems" name="totalItems" value="" min="0">
+        </div>
+        <div>
+          <label for="itemsPerPage">itemsPerPage</label>
+          <input type="number" id="itemsPerPage" name="itemsPerPage" value="" min="1">
+        </div>
+        <div>
+          <label for="currentPage">currentPage</label>
+          <input type="number" id="currentPage" name="currentPage" value="" min="0">
+        </div>
+        <div>
+          <label for="callback">callback</label>
+          <input type="text" id="callback" name="callback" value="">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Options:</legend>
+        <div>
+          <label for="outerPagesCount">outerPagesCount</label>
+          <input type="number" id="outerPagesCount" name="outerPagesCount" value="" min="0">
+        </div>
+        <div>
+          <label for="innerPagesCount">innerPagesCount</label>
+          <input type="number" id="innerPagesCount" name="innerPagesCount" value="" min="0">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Labels:</legend>
+        <div>
+          <label for="currentPage">currentPage</label>
+          <input type="text" id="currentPage" name="currentPage" value="">
+        </div>
+        <div>
+          <label for="previousPage">previousPage</label>
+          <input type="text" id="previousPage" name="previousPage" value="">
+        </div>
+        <div>
+          <label for="nextPage">nextPage</label>
+          <input type="text" id="nextPage" name="nextPage" value="">
+        </div>
+        <div>
+          <label for="firstPage">firstPage</label>
+          <input type="text" id="firstPage" name="firstPage" value="">
+        </div>
+        <div>
+          <label for="lastPage">lastPage</label>
+          <input type="text" id="lastPage" name="lastPage" value="">
+        </div>
+        <div>
+          <label for="gapPage">gapPage</label>
+          <input type="text" id="gapPage" name="gapPage" value="">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Features:</legend>
+        <div>
+          <input type="checkbox" id="hideAuto"      name="hideAuto"       value="">
+          <label for="hideAuto">hideAuto</label>
+        </div>
+        <div>
+          <input type="checkbox" id="hideGaps"      name="hideGaps"       value="">
+          <label for="hideGaps">hideGaps</label>
+        </div>
+        <div>
+          <input type="checkbox" id="hideAdjacent"  name="hideAdjacent"   value="">
+          <label for="hideAdjacent">hideAdjacent</label>
+        </div>
+        <div>
+          <input type="checkbox" id="hideDisabled"  name="hideDisabled"   value="">
+          <label for="hideDisabled">hideDisabled</label>
+        </div>
+      </fieldset>
+    </form>
+    <hr>
+    <h2>Preview</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </p>
+    <br>
+    <nav id="pagination" class="pagination"></nav>
   </body>
 </html>
