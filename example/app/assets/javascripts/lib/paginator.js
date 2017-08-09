@@ -187,6 +187,7 @@ class Paginator {
         const states = [];
         let label = i;
         if (i === this.currentPage) {
+          label = this.labels.currentPage;
           states.push(this.pageStates.current);
         }
         if (i === this.firstPage) {
