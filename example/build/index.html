@@ -12,86 +12,103 @@
   <body>
     <h1>Examples</h1>
     <hr>
-    <form>
+    <form id="paginator-settings">
       <fieldset>
         <legend>Required:</legend>
         <div>
           <label for="totalItems">totalItems</label>
-          <input type="number" id="totalItems" name="totalItems" value="" min="0">
+          <input type="number" id="totalItems" name="totalItems" value="1000" min="0" step="10">
         </div>
         <div>
           <label for="itemsPerPage">itemsPerPage</label>
-          <input type="number" id="itemsPerPage" name="itemsPerPage" value="" min="1">
+          <input type="number" id="itemsPerPage" name="itemsPerPage" value="10" min="1">
         </div>
         <div>
           <label for="currentPage">currentPage</label>
-          <input type="number" id="currentPage" name="currentPage" value="" min="0">
+          <input type="number" id="currentPage" name="currentPage" value="1" min="0">
         </div>
         <div>
           <label for="callback">callback</label>
-          <input type="text" id="callback" name="callback" value="">
+          <input type="text" id="callback" name="callback" value="yourCallback" disabled>
         </div>
       </fieldset>
       <fieldset>
         <legend>Options:</legend>
         <div>
-          <label for="outerPagesCount">outerPagesCount</label>
-          <input type="number" id="outerPagesCount" name="outerPagesCount" value="" min="0">
+          <label for="options_outerPagesCount">outerPagesCount</label>
+          <input type="number" id="options_outerPagesCount" name="options_outerPagesCount" value="2" min="0">
         </div>
         <div>
-          <label for="innerPagesCount">innerPagesCount</label>
-          <input type="number" id="innerPagesCount" name="innerPagesCount" value="" min="0">
+          <label for="options_innerPagesCount">innerPagesCount</label>
+          <input type="number" id="options_innerPagesCount" name="options_innerPagesCount" value="2" min="0">
         </div>
       </fieldset>
       <fieldset>
         <legend>Labels:</legend>
         <div>
-          <label for="currentPage">currentPage</label>
-          <input type="text" id="currentPage" name="currentPage" value="">
+          <label for="labels_currentPage">currentPage</label>
+          <input type="text" id="labels_currentPage" name="labels_currentPage" value="">
         </div>
         <div>
-          <label for="previousPage">previousPage</label>
-          <input type="text" id="previousPage" name="previousPage" value="">
+          <label for="labels_previousPage">previousPage</label>
+          <input type="text" id="labels_previousPage" name="labels_previousPage" value="">
         </div>
         <div>
-          <label for="nextPage">nextPage</label>
-          <input type="text" id="nextPage" name="nextPage" value="">
+          <label for="labels_nextPage">nextPage</label>
+          <input type="text" id="labels_nextPage" name="labels_nextPage" value="">
         </div>
         <div>
-          <label for="firstPage">firstPage</label>
-          <input type="text" id="firstPage" name="firstPage" value="">
+          <label for="labels_firstPage">firstPage</label>
+          <input type="text" id="labels_firstPage" name="labels_firstPage" value="">
         </div>
         <div>
-          <label for="lastPage">lastPage</label>
-          <input type="text" id="lastPage" name="lastPage" value="">
+          <label for="labels_lastPage">lastPage</label>
+          <input type="text" id="labels_lastPage" name="labels_lastPage" value="">
         </div>
         <div>
-          <label for="gapPage">gapPage</label>
-          <input type="text" id="gapPage" name="gapPage" value="">
+          <label for="labels_gapPage">gapPage</label>
+          <input type="text" id="labels_gapPage" name="labels_gapPage" value="">
         </div>
       </fieldset>
       <fieldset>
         <legend>Features:</legend>
         <div>
-          <input type="checkbox" id="hideAuto"      name="hideAuto"       value="">
-          <label for="hideAuto">hideAuto</label>
+          <label for="features_hideAuto">hideAuto</label>
+          <select id="features_hideAuto" name="features_hideAuto">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
         </div>
         <div>
-          <input type="checkbox" id="hideGaps"      name="hideGaps"       value="">
-          <label for="hideGaps">hideGaps</label>
+          <label for="features_hideGaps">hideGaps</label>
+          <select id="features_hideGaps" name="features_hideGaps">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
         </div>
         <div>
-          <input type="checkbox" id="hideAdjacent"  name="hideAdjacent"   value="">
-          <label for="hideAdjacent">hideAdjacent</label>
+          <label for="features_hideAdjacent">hideAdjacent</label>
+          <select id="features_hideAdjacent" name="features_hideAdjacent">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
         </div>
         <div>
-          <input type="checkbox" id="hideDisabled"  name="hideDisabled"   value="">
-          <label for="hideDisabled">hideDisabled</label>
+          <label for="features_hideDisabled">hideDisabled</label>
+          <select id="features_hideDisabled" name="features_hideDisabled">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
         </div>
       </fieldset>
     </form>
     <hr>
     <h2>Preview</h2>
+    <p>
+      Tweak some of the settings above and watch the pagination be generated.
+      <br>
+      You can tweak, click and preview the pagination as much as you like.
+    </p>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

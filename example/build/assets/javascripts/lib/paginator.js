@@ -39,7 +39,7 @@ var Paginator = function () {
     };
 
     this.labels = {
-      currentPage: params.labels.currentPage || this.currentPage,
+      currentPage: params.labels.currentPage || null,
       previousPage: params.labels.previousPage || '❮',
       nextPage: params.labels.nextPage || '❯',
       firstPage: params.labels.firstPage || this.firstPage,
@@ -212,6 +212,9 @@ var Paginator = function () {
           var states = [];
           var label = i;
           if (i === this.currentPage) {
+            if (this.labels.currentPage !== null) {
+              label = this.labels.currentPage;
+            }
             states.push(this.pageStates.current);
           }
           if (i === this.firstPage) {
