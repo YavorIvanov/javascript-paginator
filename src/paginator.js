@@ -26,7 +26,7 @@ class Paginator {
     };
 
     this.labels = {
-      currentPage:  params.labels.currentPage   || this.currentPage,
+      currentPage:  params.labels.currentPage   || null,
       previousPage: params.labels.previousPage  || '❮',
       nextPage:     params.labels.nextPage      || '❯',
       firstPage:    params.labels.firstPage     || this.firstPage,
@@ -187,7 +187,9 @@ class Paginator {
         const states = [];
         let label = i;
         if (i === this.currentPage) {
-          label = this.labels.currentPage;
+          if (this.labels.currentPage !== null) {
+            label = this.labels.currentPage;
+          }
           states.push(this.pageStates.current);
         }
         if (i === this.firstPage) {
