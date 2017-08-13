@@ -244,7 +244,7 @@ var Paginator = function () {
       var containers = document.querySelectorAll(containerSelector);
 
       // Create DOM list
-      var list = document.createElement('ul');
+      var list = document.createElement('ol');
       // This would contain all list pages
 
       var self = this; // TODO should be able to remove this when refactoring

@@ -50,8 +50,6 @@ function loadExample(formFields) {
     }
   }
 
-  //console.info('formParams', formParams);
-
   function yourCallback() {
     var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -85,8 +83,6 @@ function loadExample(formFields) {
       hideDisabled: formParams.features.hideDisabled
     }
   };
-
-  //console.info('options', options);
 
   var paginator = new Paginator(options);
   paginator.update('#pagination');

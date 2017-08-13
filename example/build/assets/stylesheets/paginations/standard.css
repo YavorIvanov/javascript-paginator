@@ -1,29 +1,41 @@
 .pagination {
-  display: inline-block;
-  margin: 0 0;
-  padding: 0 0; }
-  .pagination ul {
-    display: block;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+  .pagination ol {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     margin: 0;
-    padding: 0;
-    line-height: 25px;
-    text-align: center; }
-    .pagination ul li {
-      display: inline-block;
-      margin: 2px;
-      height: 25px; }
-      .pagination ul li a {
+    padding: 0; }
+    .pagination ol li {
+      display: block;
+      box-sizing: border-box;
+      flex-basis: auto;
+      flex-grow: 0;
+      flex-shrink: 0;
+      margin: 0 2px;
+      padding: 0; }
+      .pagination ol li a {
+        display: block;
+        box-sizing: border-box;
         cursor: pointer;
         border-radius: 3px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px;
-        margin: 1px 2px;
+        margin: 0;
         padding: 5px 10px;
-        border-top: 1px solid #fff;
+        border-top: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        border-left: 1px solid #ccc;
         text-decoration: none;
         color: #717171;
         font-size: smaller;
         font-family: "Helvetica Neueu", Helvetica, Arial, sans-serif;
-        text-shadow: white 0 1px 0;
+        text-shadow: #ffffff 0 1px 0;
         background-color: #f5f5f5;
         background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#eaeaea));
         background-image: -webkit-linear-gradient(top, #f9f9f9, #eaeaea);
@@ -32,11 +44,7 @@
         background-image: -o-linear-gradient(top, #f9f9f9, #eaeaea);
         background-image: linear-gradient(top, #f9f9f9, #eaeaea);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9f9f9', EndColorStr='#eaeaea'); }
-        .pagination ul li a:first-child {
-          margin-left: 0; }
-        .pagination ul li a:last-child {
-          margin-left: 0; }
-        .pagination ul li a:hover, .pagination ul li a:focus {
+        .pagination ol li a:hover, .pagination ol li a:focus {
           border-color: #fff;
           background-color: #fdfdfd;
           background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#fafafa));
@@ -46,11 +54,10 @@
           background-image: -o-linear-gradient(top, #fefefe, #fafafa);
           background-image: linear-gradient(top, #fefefe, #fafafa);
           filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe', EndColorStr='#fafafa'); }
-        .pagination ul li a.current {
-          box-shadow: rgba(0, 0, 0, 0.75) 0 0 0 0 inset;
+        .pagination ol li a.current {
           border-color: #505050;
           color: #f2f2f2;
-          text-shadow: black 0 1px 0;
+          text-shadow: #000000 0 1px 0;
           background-color: #676767;
           background-image: -webkit-gradient(linear, left top, left bottom, from(#5f5f5f), to(#5c5c5c));
           background-image: -webkit-linear-gradient(top, #5f5f5f, #5c5c5c);
@@ -59,22 +66,19 @@
           background-image: -o-linear-gradient(top, #5f5f5f, #5c5c5c);
           background-image: linear-gradient(top, #5f5f5f, #5c5c5c);
           filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndColorStr='#5c5c5c'); }
-        .pagination ul li a.previous {
-          background: none; }
-        .pagination ul li a.next {
-          background: none; }
-        .pagination ul li a.first {
+        .pagination ol li a.first {
           text-decoration: underline; }
-        .pagination ul li a.last {
+        .pagination ol li a.last {
           text-decoration: underline; }
-        .pagination ul li a.disabled {
+        .pagination ol li a.disabled {
           pointer-events: none !important;
           color: #ddd;
-          box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px; }
-        .pagination ul li a.hide {
+          border: 1px solid #ddd; }
+        .pagination ol li a.hide {
           display: none; }
-        .pagination ul li a.gap {
+        .pagination ol li a.gap {
           pointer-events: none !important;
           background-color: transparent;
           background-image: none;
-          box-shadow: none; }
+          box-shadow: none;
+          border: none; }

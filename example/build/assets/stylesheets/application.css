@@ -22,3 +22,7 @@
     display: inline-block;
     width: 40%;
     text-align: right; }
+
+#preview {
+  width: 50%;
+  margin: 0 auto; }

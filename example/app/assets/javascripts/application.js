@@ -48,8 +48,6 @@ function loadExample(formFields) {
     }
   }
 
-  //console.info('formParams', formParams);
-
   function yourCallback(args = {}) {
     //console.info(args);
     paginator.currentPage = args.page;
@@ -81,8 +79,6 @@ function loadExample(formFields) {
       hideDisabled: formParams.features.hideDisabled
     }
   };
-
-  //console.info('options', options);
 
   var paginator = new Paginator(options);
   paginator.update('#pagination');
