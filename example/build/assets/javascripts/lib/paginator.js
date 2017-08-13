@@ -68,14 +68,6 @@ var Paginator = function () {
     };
     // up to date Pages array of Page objects
     this.pages = [];
-    // TODO make this another class and use real objects
-    // NB filled with page object:
-    //page = {
-    //  order: 0
-    //  label: 'previous',
-    //  state: ['disabled', 'previous'],
-    //  node: <DOM/NODE>
-    //};
   }
 
   _createClass(Paginator, [{
