@@ -86,4 +86,10 @@ function loadExample(formFields) {
 
   var paginator = new Paginator(options);
   paginator.update('#pagination');
+
+  // show code sample
+  var codeSampleField = document.querySelectorAll('#generated-code');
+  var codeSample = JSON.stringify(options, null, '\t');
+  codeSample = 'options = ' + codeSample + '\n' + 'var paginator = new Paginator(options);' + '\n' + 'paginator.update("#pagination");';
+  codeSampleField[0].value = codeSample;
 }

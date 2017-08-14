@@ -178,12 +178,6 @@ class Paginator {
         // Determine page class and name
         const states = [];
         let label = i;
-        if (i === this.currentPage) {
-          if (this.labels.currentPage !== null) {
-            label = this.labels.currentPage;
-          }
-          states.push(this.pageStates.current);
-        }
         if (i === this.firstPage) {
           label = this.labels.firstPage;
           states.push(this.pageStates.first);
@@ -191,6 +185,12 @@ class Paginator {
         if (i === this.lastPage) {
           label = this.labels.lastPage;
           states.push(this.pageStates.last);
+        }
+        if (i === this.currentPage) {
+          if (this.labels.currentPage !== null) {
+            label = this.labels.currentPage;
+          }
+          states.push(this.pageStates.current);
         }
         // Push page
         const page = new Page(i, label, states, {page: i});

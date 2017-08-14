@@ -1,3 +1,6 @@
+body {
+  padding: 0px 0 50px 0;
+}
 #paginator-settings {
   overflow: hidden;
   padding: 20px 0;
@@ -27,7 +30,23 @@
   }
 }
 
-#preview {
-  width: 50%;
+#paginator-preview {
+  width: 100%;
   margin: 0 auto;
+  overflow: hidden;
+  #visual {
+    float: left;
+    width: 45%;
+    margin: 0 auto;
+  }
+  #code {
+    float: right;
+    width: 45%;
+    #generated-code {
+      width: 90%;
+      height: 330px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+    }
+  }
 }
