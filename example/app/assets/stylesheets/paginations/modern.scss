@@ -1,0 +1,101 @@
+.pagination {
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  ol {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 25px 25px 25px 25px;
+    border: 1px solid #transparent;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.25);
+    li {
+      display: block;
+      box-sizing: border-box;
+      flex-basis: auto;
+      flex-grow: 0;
+      flex-shrink: 0;
+      //align-self: center; // overwrites 'align-items'
+      //order: 0;
+      margin: 0;
+      padding: 0;
+      a {
+        display: block;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 0;
+        padding: 10px 15px;
+        border: {
+          //top:    1px solid #fff;
+          right:  1px solid #F0F0F0;
+          //bottom: 1px solid #fff;
+          //left:   1px solid #EAEAEA;
+        }
+        text-decoration: none;
+        color: #6b6b6b;
+        font-weight: bold;
+        font-family: "Helvetica Neueu", Helvetica, Arial, sans-serif;
+        background-color: #fafafa;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff),           to(#fafafa));
+        background-image:                         -webkit-linear-gradient(top, #ffffff,               #fafafa);
+        background-image:                            -moz-linear-gradient(top, #ffffff,               #fafafa);
+        background-image:                             -ms-linear-gradient(top, #ffffff,               #fafafa);
+        background-image:                              -o-linear-gradient(top, #ffffff,               #fafafa);
+        background-image:                                 linear-gradient(top, #ffffff,               #fafafa);
+        filter: progid:DXImageTransform.Microsoft.gradient(     startColorStr='#ffffff', EndColorStr='#fafafa');
+        &:hover,
+        &:focus {
+          color: #ffffff;
+          text-shadow: #000000 0 1px 0;
+          box-shadow: inset 0px 0px 5px rgba(0,0,0,0.50);
+          background-color: #DB5D4C;
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#DB5D4C),           to(#C54836));
+          background-image:                         -webkit-linear-gradient(top, #DB5D4C,               #C54836);
+          background-image:                            -moz-linear-gradient(top, #DB5D4C,               #C54836);
+          background-image:                             -ms-linear-gradient(top, #DB5D4C,               #C54836);
+          background-image:                              -o-linear-gradient(top, #DB5D4C,               #C54836);
+          background-image:                                 linear-gradient(top, #DB5D4C,               #C54836);
+          filter: progid:DXImageTransform.Microsoft.gradient(     startColorStr='#DB5D4C', EndColorStr='#C54836');
+        }
+        &.current {
+          color: #DB5D4C;
+          text-shadow: #ffffff 0 1px 0;
+          &:hover {
+            color: #ffffff;
+          }
+        }
+        &.previous {
+          border-radius: 50% 0 0 50%; // left side round
+          //background: none;
+        }
+        &.next {
+          border-radius: 0 50% 50% 0; // right side round
+          //background: none;
+        }
+        &.first {
+          //text-decoration: underline;
+        }
+        &.last {
+          //text-decoration: underline;
+        }
+        &.disabled {
+          pointer-events: none !important;
+          color: #ddd;
+        }
+        &.hide {
+          display: none;
+        }
+        &.gap {
+          pointer-events: none !important;
+        }
+      }
+    }
+  }
+}

@@ -43,7 +43,7 @@
         background-image: -ms-linear-gradient(top, #f9f9f9, #eaeaea);
         background-image: -o-linear-gradient(top, #f9f9f9, #eaeaea);
         background-image: linear-gradient(top, #f9f9f9, #eaeaea);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9f9f9', EndColorStr='#eaeaea'); }
+        filter: progid:DXImageTransform.Microsoft.gradient(     startColorStr='#f9f9f9', EndColorStr='#eaeaea'); }
         .pagination ol li a:hover, .pagination ol li a:focus {
           border-color: #505050;
           color: #f2f2f2;
@@ -55,7 +55,7 @@
           background-image: -ms-linear-gradient(top, #5f5f5f, #5c5c5c);
           background-image: -o-linear-gradient(top, #5f5f5f, #5c5c5c);
           background-image: linear-gradient(top, #5f5f5f, #5c5c5c);
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndColorStr='#5c5c5c'); }
+          filter: progid:DXImageTransform.Microsoft.gradient(     startColorStr='#5f5f5f', EndColorStr='#5c5c5c'); }
         .pagination ol li a.current {
           border-color: #505050;
           color: #f2f2f2;
@@ -67,7 +67,7 @@
           background-image: -ms-linear-gradient(top, #5f5f5f, #5c5c5c);
           background-image: -o-linear-gradient(top, #5f5f5f, #5c5c5c);
           background-image: linear-gradient(top, #5f5f5f, #5c5c5c);
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndColorStr='#5c5c5c'); }
+          filter: progid:DXImageTransform.Microsoft.gradient(     startColorStr='#5f5f5f', EndColorStr='#5c5c5c'); }
         .pagination ol li a.disabled {
           pointer-events: none !important;
           color: #ddd;
