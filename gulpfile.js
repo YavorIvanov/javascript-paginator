@@ -2,15 +2,17 @@
 const gulp        = require('gulp');
 const sass        = require('gulp-sass');
 const del         = require('del');
+const concat      = require('gulp-concat-multi');
 const babel       = require('gulp-babel');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync').create();
 
 // variables
-const path_source   = './src/**/*';
-const path_example  = './example';
-const path_app      = path_example + '/app';
-const path_build    = path_example + '/build';
+const path_source       = './src/*.js';
+const path_source_dist  = './src/dist';
+const path_example      = './example';
+const path_app          = path_example + '/app';
+const path_build        = path_example + '/build';
 
 const path_html_input  = path_app   + '/**/*.html';
 const path_html_output = path_build + '/';
@@ -33,7 +35,9 @@ gulp.task('default', function(callback) {
 
 // tasks - build space
 gulp.task('build:src', function() {
-  return gulp.src(path_source).
+  del([path_js_lib]); // clean up any remnants
+  return concat({'javascript-paginator.js': path_source}).
+    pipe(gulp.dest(path_source_dist)).
     pipe(gulp.dest(path_js_lib));
 });
 
