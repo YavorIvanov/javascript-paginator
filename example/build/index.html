@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <link rel="stylesheet" href="assets/stylesheets/application.css">
+    <link rel="stylesheet" href="assets/stylesheets/paginations/modern.css">
+    <script src="assets/javascripts/lib/javascript-paginator.js"></script>
+    <script src="assets/javascripts/application.js"></script>
+  </head>
+  <body>
+    <h1>Examples</h1>
+    <hr>
+    <form id="paginator-settings">
+      <fieldset>
+        <legend>Required:</legend>
+        <div>
+          <label for="totalItems">totalItems</label>
+          <input type="number" id="totalItems" name="totalItems" value="1000" min="0" step="10">
+        </div>
+        <div>
+          <label for="itemsPerPage">itemsPerPage</label>
+          <input type="number" id="itemsPerPage" name="itemsPerPage" value="10" min="1">
+        </div>
+        <div>
+          <label for="currentPage">currentPage</label>
+          <input type="number" id="currentPage" name="currentPage" value="1" min="0">
+        </div>
+        <div>
+          <label for="callback">callback</label>
+          <input type="text" id="callback" name="callback" value="yourCallback" disabled>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Options:</legend>
+        <div>
+          <label for="options_outerPagesCount">outerPagesCount</label>
+          <input type="number" id="options_outerPagesCount" name="options_outerPagesCount" value="2" min="0">
+        </div>
+        <div>
+          <label for="options_innerPagesCount">innerPagesCount</label>
+          <input type="number" id="options_innerPagesCount" name="options_innerPagesCount" value="2" min="0">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Labels:</legend>
+        <div>
+          <label for="labels_currentPage">currentPage</label>
+          <input type="text" id="labels_currentPage" name="labels_currentPage" value="">
+        </div>
+        <div>
+          <label for="labels_previousPage">previousPage</label>
+          <input type="text" id="labels_previousPage" name="labels_previousPage" value="">
+        </div>
+        <div>
+          <label for="labels_nextPage">nextPage</label>
+          <input type="text" id="labels_nextPage" name="labels_nextPage" value="">
+        </div>
+        <div>
+          <label for="labels_firstPage">firstPage</label>
+          <input type="text" id="labels_firstPage" name="labels_firstPage" value="">
+        </div>
+        <div>
+          <label for="labels_lastPage">lastPage</label>
+          <input type="text" id="labels_lastPage" name="labels_lastPage" value="">
+        </div>
+        <div>
+          <label for="labels_gapPage">gapPage</label>
+          <input type="text" id="labels_gapPage" name="labels_gapPage" value="">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Features:</legend>
+        <div>
+          <label for="features_autoHide">autoHide</label>
+          <select id="features_autoHide" name="features_autoHide">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
+        </div>
+        <div>
+          <label for="features_hideGaps">hideGaps</label>
+          <select id="features_hideGaps" name="features_hideGaps">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
+        </div>
+        <div>
+          <label for="features_hideAdjacent">hideAdjacent</label>
+          <select id="features_hideAdjacent" name="features_hideAdjacent">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
+        </div>
+        <div>
+          <label for="features_hideDisabled">hideDisabled</label>
+          <select id="features_hideDisabled" name="features_hideDisabled">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
+        </div>
+        <div>
+          <label for="features_hidePages">hidePages</label>
+          <select id="features_hidePages" name="features_hidePages">
+            <option value="">disabled</option>
+            <option value="1">enabled</option>
+          </select>
+        </div>
+      </fieldset>
+    </form>
+    <hr>
+    <div id="paginator-preview">
+      <div id="visual">
+        <h2>Visual preview</h2>
+        <p>
+          Tweak some of the settings above and watch the pagination be generated.
+          <br>
+          You can tweak, click and preview the pagination as much as you like.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+          cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </p>
+        <br>
+        <nav id="pagination" class="pagination"></nav>
+      </div>
+      <div id="code">
+        <h2>Generated code</h2>
+        <textarea id="generated-code" disabled></textarea>
+      </div>
+    </div>
+  </body>
+</html>
