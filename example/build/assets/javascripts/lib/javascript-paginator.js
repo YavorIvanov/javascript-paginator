@@ -90,10 +90,11 @@ var Paginator = function () {
 
     // feature switches
     this.features = {
-      hideAuto: params.features.hideAuto || false, // hide the whole pagination if it's one page
+      autoHide: params.features.autoHide || false, // hide the whole pagination if it's one page
       hideGaps: params.features.hideGaps || false, // hide the gaps between outer and inner pages
       hideAdjacent: params.features.hideAdjacent || false, // hide the next and previous page
-      hideDisabled: params.features.hideDisabled || false // hide all pages with page state disabled
+      hideDisabled: params.features.hideDisabled || false, // hide all pages with page state disabled
+      hidePages: params.features.hidePages || false // hide all pages and gaps, but previous and next
     };
 
     // internals
@@ -215,8 +216,8 @@ var Paginator = function () {
 
       var label = this.labels.gapPage;
       var states = [this.pageStates.gap];
-      // feature => hideGaps
-      if (this.features.hideGaps) {
+      // feature => hideGaps & feature => hidePages
+      if (this.features.hideGaps || this.features.hidePages) {
         states.push(this.pageStates.hide);
       }
       // left side
@@ -258,6 +259,10 @@ var Paginator = function () {
             }
             states.push(this.pageStates.current);
           }
+          // feature => hidePages
+          if (this.features.hidePages) {
+            states.push(this.pageStates.hide);
+          }
           // Push page
           var page = new Page(i, label, states, { page: i });
           this.pages.push(page);
@@ -276,8 +281,8 @@ var Paginator = function () {
   }, {
     key: 'render',
     value: function render(containerSelector) {
-      // feature => hideAdjacent
-      if (this.features.hideAuto && this.totalPages < 2) {
+      // feature => autoHide
+      if (this.features.autoHide && this.totalPages < 2) {
         return;
       }
 

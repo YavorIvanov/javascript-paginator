@@ -62,10 +62,11 @@ class Paginator {
 
     // feature switches
     this.features = {
-      hideAuto:     params.features.hideAuto      || false, // hide the whole pagination if it's one page
+      autoHide:     params.features.autoHide      || false, // hide the whole pagination if it's one page
       hideGaps:     params.features.hideGaps      || false, // hide the gaps between outer and inner pages
       hideAdjacent: params.features.hideAdjacent  || false, // hide the next and previous page
       hideDisabled: params.features.hideDisabled  || false, // hide all pages with page state disabled
+      hidePages:    params.features.hidePages     || false, // hide all pages and gaps, but previous and next
     };
 
     // internals
@@ -173,8 +174,8 @@ class Paginator {
 
     const label = this.labels.gapPage;
     const states = [this.pageStates.gap];
-    // feature => hideGaps
-    if (this.features.hideGaps) {
+    // feature => hideGaps & feature => hidePages
+    if (this.features.hideGaps || this.features.hidePages) {
       states.push(this.pageStates.hide);
     }
     // left side
@@ -218,6 +219,10 @@ class Paginator {
           }
           states.push(this.pageStates.current);
         }
+        // feature => hidePages
+        if (this.features.hidePages) {
+          states.push(this.pageStates.hide);
+        }
         // Push page
         const page = new Page(i, label, states, {page: i});
         this.pages.push(page);
@@ -232,8 +237,8 @@ class Paginator {
   // Generate DOM and populate targeted element
   // TODO use this only for DOM render and another method to build full Pages array
   render(containerSelector) {
-    // feature => hideAdjacent
-    if (this.features.hideAuto && this.totalPages < 2) {
+    // feature => autoHide
+    if (this.features.autoHide && this.totalPages < 2) {
       return;
     }
 

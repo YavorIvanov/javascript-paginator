@@ -72,10 +72,11 @@ function loadExample(formFields) {
       gapPage:      formParams.labels.gapPage
     },
     features: {
-      hideAuto:     formParams.features.hideAuto,
+      autoHide:     formParams.features.autoHide,
       hideGaps:     formParams.features.hideGaps,
       hideAdjacent: formParams.features.hideAdjacent,
-      hideDisabled: formParams.features.hideDisabled
+      hideDisabled: formParams.features.hideDisabled,
+      hidePages:    formParams.features.hidePages
     }
   };
 
