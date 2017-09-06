@@ -39,7 +39,8 @@ var options = {
     autoHide: false,
     hideGaps: false,
     hideAdjacent: false,
-    hideDisabled: false
+    hideDisabled: false,
+    hidePages: false
   }
 };
 var paginator = new Paginator(options);
